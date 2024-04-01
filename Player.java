@@ -26,8 +26,21 @@ public class Player {
         return name;
     }
 
-    public int getCoinCount() {
-        return coinCount;
+    public int getCoinCount(String color) {
+        if (color == "red") {
+            return redCoinCount;
+        } else if (color == "blue") {
+            return blueCoinCount;
+        } else if (color == "green") {
+            return greenCoinCount;
+        } else if (color == "black") {
+            return blackCoinCount;
+        } else if (color == "white") {
+            return whiteCoinCount;
+        } else if (color == "all") {
+            return coinCount;
+        }
+        return 0;
     }
 
     public int getCardCount() {
@@ -182,7 +195,7 @@ public class Player {
     }
 
     // public int chooseAction() {
-        
+
     // }
 
     public void play() {

@@ -17,24 +17,13 @@ public class Board extends JFrame {
     public final Player player2;
     public final JButton buyButton1 = new JButton("buy");
     public final JButton buyButton2 = new JButton("buy");
-
-    private int greenCoinCount1;
-    private int redCoinCount1;
-    private int whiteCoinCount1;
-    private int blackCoinCount1;
-    private int blueCoinCount1;
-    private int goldCoinCount1;
-
-    private int greenCoinCount2;
-    private int redCoinCount2;
-    private int whiteCoinCount2;
-    private int blackCoinCount2;
-    private int blueCoinCount2;
-    private int goldCoinCount2;
+    public final JButton reserveButton1 = new JButton("reserve");
+    public final JButton reserveButton2 = new JButton("reserve");
 
     public Board() {
         player1 = new Player("Gorbe");
         player2 = new Player("Goorba");
+        player1.isOn = true;
 
         icon = new ImageIcon("icons/icon.png");
         midPanel = new JPanel();
@@ -87,12 +76,12 @@ public class Board extends JFrame {
         JLabel blueCoin1 = new JLabel();
         JLabel goldCoin1 = new JLabel();
 
-        greenCoin1.setText("" + greenCoinCount1); // change this to player1.stuff. No getter yet.
-        redCoin1.setText("" + redCoinCount1);
-        whiteCoin1.setText("" + whiteCoinCount1);
-        blackCoin1.setText("" + blackCoinCount1);
-        blueCoin1.setText("" + blueCoinCount1);
-        goldCoin1.setText("" + goldCoinCount1);
+        greenCoin1.setText("" + player1.getCoinCount("green"));
+        redCoin1.setText("" + player1.getCoinCount("red"));
+        whiteCoin1.setText("" + player1.getCoinCount("white"));
+        blackCoin1.setText("" + player1.getCoinCount("black"));
+        blueCoin1.setText("" + player1.getCoinCount("blue"));
+        goldCoin1.setText("" + player1.getCoinCount("gold"));
 
         greenCoin1.setIcon(greenCoinIcon);
         redCoin1.setIcon(redCoinIcon);
@@ -121,7 +110,6 @@ public class Board extends JFrame {
         coinPanel1.add(blueCoin1);
         coinPanel1.add(goldCoin1);
 
-
         JLabel greenCoin2 = new JLabel();
         JLabel redCoin2 = new JLabel();
         JLabel whiteCoin2 = new JLabel();
@@ -129,12 +117,12 @@ public class Board extends JFrame {
         JLabel blueCoin2 = new JLabel();
         JLabel goldCoin2 = new JLabel();
 
-        greenCoin2.setText("" + greenCoinCount2); // change this to player2.stuff. No getter yet.
-        redCoin2.setText("" + redCoinCount2);
-        whiteCoin2.setText("" + whiteCoinCount2);
-        blackCoin2.setText("" + blackCoinCount2);
-        blueCoin2.setText("" + blueCoinCount2);
-        goldCoin2.setText("" + goldCoinCount2);
+        greenCoin2.setText("" + player2.getCoinCount("green"));
+        redCoin2.setText("" + player2.getCoinCount("red"));
+        whiteCoin2.setText("" + player2.getCoinCount("white"));
+        blackCoin2.setText("" + player2.getCoinCount("black"));
+        blueCoin2.setText("" + player2.getCoinCount("blue"));
+        goldCoin2.setText("" + player2.getCoinCount("gold"));
 
         greenCoin2.setIcon(greenCoinIcon);
         redCoin2.setIcon(redCoinIcon);
@@ -177,8 +165,6 @@ public class Board extends JFrame {
         cardMidPanel.setPreferredSize(new Dimension(900, 400));
         cardMidPanel.setBackground(new Color(119, 232, 247));
 
-
-
         Card someCard = new Card(1, 3, "blue", new Price(6, 0, 4, 0, 0));
         cardMidPanel.add(someCard);
 
@@ -188,6 +174,19 @@ public class Board extends JFrame {
         cardPanel1.add(buyButton1, BorderLayout.NORTH);
         buyButton1.setVisible(false);
         buyButton1.addActionListener(Utils.listener);
+        buyButton2.setFocusable(false);
+        cardPanel2.add(buyButton2, BorderLayout.SOUTH);
+        buyButton2.setVisible(false);
+        buyButton2.addActionListener(Utils.listener);
+
+        reserveButton1.setFocusable(false);
+        cardPanel1.add(reserveButton1, BorderLayout.NORTH);
+        reserveButton1.setVisible(false);
+        reserveButton1.addActionListener(Utils.listener);
+        reserveButton2.setFocusable(false);
+        cardPanel2.add(reserveButton2, BorderLayout.SOUTH);
+        reserveButton2.setVisible(false);
+        reserveButton2.addActionListener(Utils.listener);
 
         this.setTitle("Amusement Park");
         this.setIconImage(icon.getImage());
