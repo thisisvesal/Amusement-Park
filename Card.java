@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -39,8 +40,15 @@ public class Card extends JButton {
         JPanel toyPanel = new JPanel(new FlowLayout());
         JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
+        JLabel scoreLabel = new JLabel("" + score + " ");
+        scoreLabel.setPreferredSize(new Dimension(15, 15));
+        scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scoreLabel.setVerticalAlignment(JLabel.CENTER);
+
         specialCoinPanel.setPreferredSize(new Dimension(95, 33));
         specialCoinPanel.setOpaque(false);
+        specialCoinPanel.add(scoreLabel);
         toyPanel.setPreferredSize(new Dimension(95, 50));
         toyPanel.setOpaque(false);
         pricePanel.setPreferredSize(new Dimension(95, 33));
@@ -122,10 +130,9 @@ public class Card extends JButton {
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 }
-                // toyPanel.add(toyLabel);
             }
 
-            this.add(specialCoinPanel, BorderLayout.NORTH);
+            // this.add(specialCoinPanel, BorderLayout.NORTH);
         } else {
             toyIcon = new ImageIcon("icons/cards/prizeclaw.png");
             Image image = toyIcon.getImage();
@@ -145,6 +152,7 @@ public class Card extends JButton {
             priceLabel[priceCount].setText("" + price.red);
             priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
             priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
             priceLabel[priceCount].setForeground(Color.white);
             pricePanel.add(priceLabel[priceCount]);
             priceCount++;
@@ -158,6 +166,7 @@ public class Card extends JButton {
             priceLabel[priceCount].setText("" + price.blue);
             priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
             priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
             priceLabel[priceCount].setForeground(Color.white);
             pricePanel.add(priceLabel[priceCount]);
             priceCount++;
@@ -171,6 +180,7 @@ public class Card extends JButton {
             priceLabel[priceCount].setText("" + price.green);
             priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
             priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
             priceLabel[priceCount].setForeground(Color.white);
             pricePanel.add(priceLabel[priceCount]);
             priceCount++;
@@ -184,6 +194,7 @@ public class Card extends JButton {
             priceLabel[priceCount].setText("" + price.white);
             priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
             priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
             pricePanel.add(priceLabel[priceCount]);
             priceCount++;
         }
@@ -196,11 +207,13 @@ public class Card extends JButton {
             priceLabel[priceCount].setText("" + price.black);
             priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
             priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
             priceLabel[priceCount].setForeground(Color.white);
             pricePanel.add(priceLabel[priceCount]);
             priceCount++;
         }
 
+        this.add(specialCoinPanel, BorderLayout.NORTH);
         this.add(toyPanel, BorderLayout.CENTER);
         this.add(pricePanel, BorderLayout.SOUTH);
 
