@@ -15,7 +15,7 @@ public class Player {
     private Card[] reservedCards = new Card[3];
     private int coinCount;
     private int cardCount;
-    public boolean playedTheRound;
+    public boolean isOn;
     private int score;
 
     public Player(String name) {
@@ -173,14 +173,20 @@ public class Player {
 
     public void takeCoinType1(Slot_Machine slotMachine) {
         slotMachine.giveCoin(this, 1);
-        playedTheRound = true;
     }
 
     public void takeCoinType2(Slot_Machine machine1, Slot_Machine machine2, Slot_Machine machine3) {
         machine1.giveCoin(this, 2);
         machine2.giveCoin(this, 2);
         machine3.giveCoin(this, 2);
-        playedTheRound = true;
+    }
+
+    // public int chooseAction() {
+        
+    // }
+
+    public void play() {
+
     }
 
 }

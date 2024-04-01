@@ -1,9 +1,17 @@
-public class Slot_Machine {
+import java.awt.Color;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+public class Slot_Machine extends JButton{
     public final String color;
     private int coinCount = 4;
 
-    public Slot_Machine(String color) {
+    public Slot_Machine(String color, ImageIcon icon) {
         this.color = color;
+        this.setIcon(icon); // https://icons8.com/icon/16446/slot-machine
+        this.setBackground(new Color(48, 181, 199));
+        this.setFocusable(false);
     }
 
     public int getCoinCount() {
