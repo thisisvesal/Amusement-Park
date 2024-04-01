@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +15,8 @@ public class Board extends JFrame {
     private JPanel player2Panel;
     public final Player player1;
     public final Player player2;
+    public final JButton buyButton1 = new JButton("buy");
+    public final JButton buyButton2 = new JButton("buy");
 
     private int greenCoinCount1;
     private int redCoinCount1;
@@ -163,15 +166,28 @@ public class Board extends JFrame {
         JPanel slotMachinePanel = new JPanel();
         slotMachinePanel.setBackground(new Color(119, 232, 247));
         slotMachinePanel.setPreferredSize(new Dimension(300, 400));
-        slotMachinePanel.add(new Slot_Machine("red", new ImageIcon("icons/slot_machine/sred.png")));
-        slotMachinePanel.add(new Slot_Machine("green", new ImageIcon("icons/slot_machine/sgreen.png")));
-        slotMachinePanel.add(new Slot_Machine("blue", new ImageIcon("icons/slot_machine/sblue.png")));
-        slotMachinePanel.add(new Slot_Machine("white", new ImageIcon("icons/slot_machine/swhite.png")));
-        slotMachinePanel.add(new Slot_Machine("black", new ImageIcon("icons/slot_machine/sblack.png")));
+        slotMachinePanel.add(new Slot_Machine("red"));
+        slotMachinePanel.add(new Slot_Machine("green"));
+        slotMachinePanel.add(new Slot_Machine("blue"));
+        slotMachinePanel.add(new Slot_Machine("white"));
+        slotMachinePanel.add(new Slot_Machine("black"));
         midPanel.add(slotMachinePanel, BorderLayout.EAST);
 
+        JPanel cardMidPanel = new JPanel();
+        cardMidPanel.setPreferredSize(new Dimension(900, 400));
+        cardMidPanel.setBackground(new Color(119, 232, 247));
 
 
+
+        Card someCard = new Card(1, 3, "blue", new Price(6, 0, 4, 0, 0));
+        cardMidPanel.add(someCard);
+
+        midPanel.add(cardMidPanel, BorderLayout.WEST);
+
+        buyButton1.setFocusable(false);
+        cardPanel1.add(buyButton1, BorderLayout.NORTH);
+        buyButton1.setVisible(false);
+        buyButton1.addActionListener(Utils.listener);
 
         this.setTitle("Amusement Park");
         this.setIconImage(icon.getImage());

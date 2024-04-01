@@ -7,11 +7,12 @@ public class Slot_Machine extends JButton{
     public final String color;
     private int coinCount = 4;
 
-    public Slot_Machine(String color, ImageIcon icon) {
+    public Slot_Machine(String color) {
         this.color = color;
-        this.setIcon(icon); // https://icons8.com/icon/16446/slot-machine
+        this.setIcon(new ImageIcon("icons/slot_machine/s" + color + ".png")); // https://icons8.com/icon/16446/slot-machine
         this.setBackground(new Color(48, 181, 199));
         this.setFocusable(false);
+        this.addActionListener(Utils.listener);
     }
 
     public int getCoinCount() {
