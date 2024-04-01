@@ -13,6 +13,11 @@ public class Coin {
         this(color, false, owner);
     }
 
+    public Coin(String color) {
+        this.color = color;
+        this.isSpecial = false;
+    }
+    
     public void setOwner(Player player) {
         owner = player;
     }
