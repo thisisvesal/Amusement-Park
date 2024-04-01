@@ -1,28 +1,50 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Board extends JFrame {
-    private ImageIcon icon;
-    private JPanel midPanel;
-    private JPanel player1Panel;
-    private JPanel player2Panel;
+    public final ImageIcon icon;
+    public final JPanel midPanel;
+    public final JPanel player1Panel;
+    public final JPanel player2Panel;
     public final Player player1;
     public final Player player2;
+    public final Player banker;
     public final JButton buyButton1 = new JButton("buy");
     public final JButton buyButton2 = new JButton("buy");
     public final JButton reserveButton1 = new JButton("reserve");
     public final JButton reserveButton2 = new JButton("reserve");
 
+    public final Coin greenCoin1;
+    public final Coin redCoin1;
+    public final Coin whiteCoin1;
+    public final Coin blackCoin1;
+    public final Coin blueCoin1;
+    public final Coin goldCoin1;
+    public final Coin[] allCoins1 = new Coin[6];
+    public final Coin greenCoin2;
+    public final Coin redCoin2;
+    public final Coin whiteCoin2;
+    public final Coin blackCoin2;
+    public final Coin blueCoin2;
+    public final Coin goldCoin2;
+    public final Coin[] allCoins2 = new Coin[6];
+
+    public final Card[] prizeclawCards = new Card[3];
+    public final Card[] lvl1Cards = new Card[15];
+    public final Card[] lvl2Cards = new Card[15];
+    public final Card[] lvl3Cards = new Card[15];
+
     public Board() {
         player1 = new Player("Gorbe");
         player2 = new Player("Goorba");
+        banker = new Player("Banker");
         player1.isOn = true;
 
         icon = new ImageIcon("icons/icon.png");
@@ -62,94 +84,38 @@ public class Board extends JFrame {
         player1Panel.add(cardPanel1, BorderLayout.WEST);
         player2Panel.add(cardPanel2, BorderLayout.EAST);
 
-        ImageIcon greenCoinIcon = new ImageIcon("icons/coins/green.png");
-        ImageIcon redCoinIcon = new ImageIcon("icons/coins/red.png");
-        ImageIcon whiteCoinIcon = new ImageIcon("icons/coins/white.png");
-        ImageIcon blackCoinIcon = new ImageIcon("icons/coins/black.png");
-        ImageIcon blueCoinIcon = new ImageIcon("icons/coins/blue.png");
-        ImageIcon goldCoinIcon = new ImageIcon("icons/coins/gold.png");
+        greenCoin1 = new Coin("green", player1);
+        redCoin1 = new Coin("red", player1);
+        whiteCoin1 = new Coin("white", player1);
+        blackCoin1 = new Coin("black", player1);
+        blueCoin1 = new Coin("blue", player1);
+        goldCoin1 = new Coin("gold", player1);
 
-        JLabel greenCoin1 = new JLabel();
-        JLabel redCoin1 = new JLabel();
-        JLabel whiteCoin1 = new JLabel();
-        JLabel blackCoin1 = new JLabel();
-        JLabel blueCoin1 = new JLabel();
-        JLabel goldCoin1 = new JLabel();
+        allCoins1[0] = greenCoin1;
+        allCoins1[1] = redCoin1;
+        allCoins1[2] = whiteCoin1;
+        allCoins1[3] = blackCoin1;
+        allCoins1[4] = blueCoin1;
+        allCoins1[5] = goldCoin1;
 
-        greenCoin1.setText("" + player1.getCoinCount("green"));
-        redCoin1.setText("" + player1.getCoinCount("red"));
-        whiteCoin1.setText("" + player1.getCoinCount("white"));
-        blackCoin1.setText("" + player1.getCoinCount("black"));
-        blueCoin1.setText("" + player1.getCoinCount("blue"));
-        goldCoin1.setText("" + player1.getCoinCount("gold"));
+        greenCoin2 = new Coin("green", player2);
+        redCoin2 = new Coin("red", player2);
+        whiteCoin2 = new Coin("white", player2);
+        blackCoin2 = new Coin("black", player2);
+        blueCoin2 = new Coin("blue", player2);
+        goldCoin2 = new Coin("gold", player2);
 
-        greenCoin1.setIcon(greenCoinIcon);
-        redCoin1.setIcon(redCoinIcon);
-        whiteCoin1.setIcon(whiteCoinIcon);
-        blackCoin1.setIcon(blackCoinIcon);
-        blueCoin1.setIcon(blueCoinIcon);
-        goldCoin1.setIcon(goldCoinIcon);
+        allCoins2[0] = greenCoin2;
+        allCoins2[1] = redCoin2;
+        allCoins2[2] = whiteCoin2;
+        allCoins2[3] = blackCoin2;
+        allCoins2[4] = blueCoin2;
+        allCoins2[5] = goldCoin2;
 
-        greenCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        greenCoin1.setHorizontalTextPosition(JLabel.CENTER);
-        redCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        redCoin1.setHorizontalTextPosition(JLabel.CENTER);
-        whiteCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        whiteCoin1.setHorizontalTextPosition(JLabel.CENTER);
-        blackCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        blackCoin1.setHorizontalTextPosition(JLabel.CENTER);
-        blueCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        blueCoin1.setHorizontalTextPosition(JLabel.CENTER);
-        goldCoin1.setVerticalTextPosition(JLabel.BOTTOM);
-        goldCoin1.setHorizontalTextPosition(JLabel.CENTER);
-
-        coinPanel1.add(greenCoin1);
-        coinPanel1.add(redCoin1);
-        coinPanel1.add(whiteCoin1);
-        coinPanel1.add(blackCoin1);
-        coinPanel1.add(blueCoin1);
-        coinPanel1.add(goldCoin1);
-
-        JLabel greenCoin2 = new JLabel();
-        JLabel redCoin2 = new JLabel();
-        JLabel whiteCoin2 = new JLabel();
-        JLabel blackCoin2 = new JLabel();
-        JLabel blueCoin2 = new JLabel();
-        JLabel goldCoin2 = new JLabel();
-
-        greenCoin2.setText("" + player2.getCoinCount("green"));
-        redCoin2.setText("" + player2.getCoinCount("red"));
-        whiteCoin2.setText("" + player2.getCoinCount("white"));
-        blackCoin2.setText("" + player2.getCoinCount("black"));
-        blueCoin2.setText("" + player2.getCoinCount("blue"));
-        goldCoin2.setText("" + player2.getCoinCount("gold"));
-
-        greenCoin2.setIcon(greenCoinIcon);
-        redCoin2.setIcon(redCoinIcon);
-        whiteCoin2.setIcon(whiteCoinIcon);
-        blackCoin2.setIcon(blackCoinIcon);
-        blueCoin2.setIcon(blueCoinIcon);
-        goldCoin2.setIcon(goldCoinIcon);
-
-        greenCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        greenCoin2.setHorizontalTextPosition(JLabel.CENTER);
-        redCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        redCoin2.setHorizontalTextPosition(JLabel.CENTER);
-        whiteCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        whiteCoin2.setHorizontalTextPosition(JLabel.CENTER);
-        blackCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        blackCoin2.setHorizontalTextPosition(JLabel.CENTER);
-        blueCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        blueCoin2.setHorizontalTextPosition(JLabel.CENTER);
-        goldCoin2.setVerticalTextPosition(JLabel.BOTTOM);
-        goldCoin2.setHorizontalTextPosition(JLabel.CENTER);
-
-        coinPanel2.add(greenCoin2);
-        coinPanel2.add(redCoin2);
-        coinPanel2.add(whiteCoin2);
-        coinPanel2.add(blackCoin2);
-        coinPanel2.add(blueCoin2);
-        coinPanel2.add(goldCoin2);
+        for (int i = 0; i < 6; i++) {
+            coinPanel1.add(allCoins1[i]);
+            coinPanel2.add(allCoins2[i]);
+        }
 
         JPanel slotMachinePanel = new JPanel();
         slotMachinePanel.setBackground(new Color(119, 232, 247));
@@ -162,14 +128,55 @@ public class Board extends JFrame {
         midPanel.add(slotMachinePanel, BorderLayout.EAST);
 
         JPanel cardMidPanel = new JPanel();
+        cardMidPanel.setLayout(new FlowLayout());
         cardMidPanel.setPreferredSize(new Dimension(900, 400));
         cardMidPanel.setBackground(new Color(119, 232, 247));
 
-        Card someCard = new Card(1, 3, "blue", new Price(6, 0, 4, 0, 0));
+    // ---------------------------- TEST CARD
+    // ----------------------------------------------------------------------------
+        Card someCard = new Card(1, 1, "white", new Price(1, 0, 1, 0, 0), banker);
         cardMidPanel.add(someCard);
 
         midPanel.add(cardMidPanel, BorderLayout.WEST);
 
+    // -------------------------------------------------------------------------------------------------------------------
+
+        prizeclawCards[0] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
+        prizeclawCards[1] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
+        prizeclawCards[2] = new Card(0, 4, new Price(5, 5, 0, 0, 0), banker);
+
+        // -------------------------------------------------------------------------------------------------------------------
+        for (int i = 0; i < 5; i++) {
+            lvl1Cards[i] = new Card(1, 1, "white", new Price(0, 0, 2, 3, 0), banker);
+        }
+        for (int i = 5; i < 10; i++) {
+            lvl1Cards[i] = new Card(1, 1, "blue", new Price(3, 0, 1, 0, 0), banker);
+        }
+        for (int i = 10; i < 15; i++) {
+            lvl1Cards[i] = new Card(1, 1, "green", new Price(0, 2, 2, 0, 0), banker);
+        }
+        // -------------------------------------------------------------------------------------------------------------------
+        for (int i = 0; i < 5; i++) {
+            lvl2Cards[i] = new Card(2, 2, "white", new Price(2, 0, 0, 3, 1), banker);
+        }
+        for (int i = 5; i < 10; i++) {
+            lvl2Cards[i] = new Card(2, 3, "green", new Price(3, 4, 0, 0, 0), banker);
+        }
+        for (int i = 10; i < 15; i++) {
+            lvl2Cards[i] = new Card(2, 4, "blue", new Price(3, 2, 0, 0, 0), banker);
+        }
+        // -------------------------------------------------------------------------------------------------------------------
+        for (int i = 0; i < 5; i++) {
+            lvl3Cards[i] = new Card(3, 4, "green", new Price(5, 2, 0, 0, 0), banker);
+        }
+        for (int i = 5; i < 10; i++) {
+            lvl3Cards[i] = new Card(3, 4, "blue", new Price(6, 6, 0, 0, 0), banker);
+        }
+        for (int i = 10; i < 15; i++) {
+            lvl3Cards[i] = new Card(3, 4, "red", new Price(5, 3, 0, 1, 0), banker);
+        }
+    // -------------------------------------------------------------------------------------------------------------------
+ 
         buyButton1.setFocusable(false);
         cardPanel1.add(buyButton1, BorderLayout.NORTH);
         buyButton1.setVisible(false);
