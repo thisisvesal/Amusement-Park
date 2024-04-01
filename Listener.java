@@ -9,8 +9,13 @@ public class Listener implements ActionListener {
             System.out.println("slotmachine");
             if (Utils.board.player1.isOn) {
                 Utils.board.player1.addCoin(new Coin(slotMachine.color));
+                for (int i = 0; i < 6; i++) {
+                    if (Utils.board.allCoins1[i].color == slotMachine.color) {
+                        Utils.board.allCoins1[i].setText("" + Utils.board.player1.getCoinCount(slotMachine.color));
+                    }
+                }
+                System.out.println(Utils.board.player1.getCoinCount(slotMachine.color));
             }
-
             Utils.board.revalidate();
             Utils.board.repaint();
         } else if (e.getSource() instanceof Card) {
