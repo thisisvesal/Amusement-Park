@@ -2,20 +2,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Board extends JFrame {
     public final ImageIcon icon;
-    public final JPanel midPanel;
-    public final JPanel player1Panel;
-    public final JPanel player2Panel;
-    public final Player player1;
-    public final Player player2;
-    public final Player banker;
+    public final JPanel midPanel = new JPanel();
+    public final JPanel player1Panel = new JPanel();
+    public final JPanel player2Panel = new JPanel();
+    public final Player player1 = new Player("Player1");
+    public final Player player2 = new Player("Player2");
+    public final Player banker = new Player("Banker");
     public final JButton buyButton1 = new JButton("buy");
     public final JButton buyButton2 = new JButton("buy");
     public final JButton reserveButton1 = new JButton("reserve");
@@ -41,20 +43,24 @@ public class Board extends JFrame {
     public final Card[] lvl2Cards = new Card[15];
     public final Card[] lvl3Cards = new Card[15];
 
-    public Board() {
-        player1 = new Player("Gorbe");
-        player2 = new Player("Goorba");
-        banker = new Player("Banker");
-        player1.isOn = true;
+    public final JLabel score1 = new JLabel();
+    public final JLabel score2 = new JLabel();
+    public final JButton passButton = new JButton();
 
+    Slot_Machine redMachine = new Slot_Machine("red");
+    Slot_Machine greenMachine = new Slot_Machine("green");
+    Slot_Machine blueMachine = new Slot_Machine("blue");
+    Slot_Machine whiteMachine = new Slot_Machine("white");
+    Slot_Machine blackMachine = new Slot_Machine("black");
+
+    public Board() {
+        this.addMouseMotionListener(Utils.mouseListener);
+        player1.isOn = true;
         icon = new ImageIcon("icons/icon.png");
-        midPanel = new JPanel();
-        player1Panel = new JPanel();
-        player2Panel = new JPanel();
 
         midPanel.setLayout(new BorderLayout(0, 0));
-        player1Panel.setLayout(new BorderLayout(0, 0));
-        player2Panel.setLayout(new BorderLayout(0, 0));
+        player1Panel.setLayout(new FlowLayout());
+        player2Panel.setLayout(new FlowLayout());
 
         player1Panel.setBackground(Color.white);
         player2Panel.setBackground(Color.white);
@@ -71,18 +77,25 @@ public class Board extends JFrame {
         coinPanel1.setPreferredSize(new Dimension(295, 200));
         coinPanel2.setPreferredSize(new Dimension(295, 200));
 
-        player1Panel.add(coinPanel1, BorderLayout.EAST);
-        player2Panel.add(coinPanel2, BorderLayout.WEST);
+        JPanel ownedCardPanel1 = new JPanel();
+        JPanel reservedCardPanel1 = new JPanel();
+        JPanel ownedCardPanel2 = new JPanel();
+        JPanel reservedCardPanel2 = new JPanel();
+        ownedCardPanel1.setBackground(new Color(218, 184, 245));
+        reservedCardPanel1.setBackground(new Color(218, 184, 245));
+        ownedCardPanel2.setBackground(new Color(184, 245, 210));
+        reservedCardPanel2.setBackground(new Color(184, 245, 210));
+        ownedCardPanel1.setPreferredSize(new Dimension(575, 200));
+        ownedCardPanel2.setPreferredSize(new Dimension(575, 200));
+        reservedCardPanel1.setPreferredSize(new Dimension(300, 200));
+        reservedCardPanel2.setPreferredSize(new Dimension(300, 200));
 
-        JPanel cardPanel1 = new JPanel();
-        JPanel cardPanel2 = new JPanel();
-        cardPanel1.setBackground(new Color(218, 184, 245));
-        cardPanel2.setBackground(new Color(184, 245, 210));
-        cardPanel1.setPreferredSize(new Dimension(875, 200));
-        cardPanel2.setPreferredSize(new Dimension(875, 200));
-
-        player1Panel.add(cardPanel1, BorderLayout.WEST);
-        player2Panel.add(cardPanel2, BorderLayout.EAST);
+        player1Panel.add(reservedCardPanel1);
+        player2Panel.add(reservedCardPanel2);
+        player1Panel.add(ownedCardPanel1);
+        player2Panel.add(ownedCardPanel2);
+        player1Panel.add(coinPanel1);
+        player2Panel.add(coinPanel2);
 
         greenCoin1 = new Coin("green", player1);
         redCoin1 = new Coin("red", player1);
@@ -120,11 +133,11 @@ public class Board extends JFrame {
         JPanel slotMachinePanel = new JPanel();
         slotMachinePanel.setBackground(new Color(119, 232, 247));
         slotMachinePanel.setPreferredSize(new Dimension(300, 400));
-        slotMachinePanel.add(new Slot_Machine("red"));
-        slotMachinePanel.add(new Slot_Machine("green"));
-        slotMachinePanel.add(new Slot_Machine("blue"));
-        slotMachinePanel.add(new Slot_Machine("white"));
-        slotMachinePanel.add(new Slot_Machine("black"));
+        slotMachinePanel.add(redMachine);
+        slotMachinePanel.add(greenMachine);
+        slotMachinePanel.add(blueMachine);
+        slotMachinePanel.add(whiteMachine);
+        slotMachinePanel.add(blackMachine);
         midPanel.add(slotMachinePanel, BorderLayout.EAST);
 
         JPanel cardMidPanel = new JPanel();
@@ -132,14 +145,14 @@ public class Board extends JFrame {
         cardMidPanel.setPreferredSize(new Dimension(900, 400));
         cardMidPanel.setBackground(new Color(119, 232, 247));
 
-    // ---------------------------- TEST CARD
-    // ----------------------------------------------------------------------------
+        // ---------------------------- TEST CARD
+        // ----------------------------------------------------------------------------
         Card someCard = new Card(1, 1, "white", new Price(1, 0, 1, 0, 0), banker);
         cardMidPanel.add(someCard);
 
-        midPanel.add(cardMidPanel, BorderLayout.WEST);
+        midPanel.add(cardMidPanel, BorderLayout.CENTER);
 
-    // -------------------------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------------
 
         prizeclawCards[0] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
         prizeclawCards[1] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
@@ -175,26 +188,68 @@ public class Board extends JFrame {
         for (int i = 10; i < 15; i++) {
             lvl3Cards[i] = new Card(3, 4, "red", new Price(5, 3, 0, 1, 0), banker);
         }
-    // -------------------------------------------------------------------------------------------------------------------
- 
+        // -------------------------------------------------------------------------------------------------------------------
+        // Reserve/Buy buttons:
         buyButton1.setFocusable(false);
-        cardPanel1.add(buyButton1, BorderLayout.NORTH);
+        ownedCardPanel1.add(buyButton1, BorderLayout.NORTH);
         buyButton1.setVisible(false);
         buyButton1.addActionListener(Utils.listener);
         buyButton2.setFocusable(false);
-        cardPanel2.add(buyButton2, BorderLayout.SOUTH);
+        ownedCardPanel2.add(buyButton2, BorderLayout.SOUTH);
         buyButton2.setVisible(false);
         buyButton2.addActionListener(Utils.listener);
 
         reserveButton1.setFocusable(false);
-        cardPanel1.add(reserveButton1, BorderLayout.NORTH);
+        ownedCardPanel1.add(reserveButton1, BorderLayout.NORTH);
         reserveButton1.setVisible(false);
         reserveButton1.addActionListener(Utils.listener);
         reserveButton2.setFocusable(false);
-        cardPanel2.add(reserveButton2, BorderLayout.SOUTH);
+        ownedCardPanel2.add(reserveButton2, BorderLayout.SOUTH);
         reserveButton2.setVisible(false);
         reserveButton2.addActionListener(Utils.listener);
 
+        // The score board:
+        JPanel scoreTray = new JPanel(new FlowLayout());
+        scoreTray.setPreferredSize(new Dimension(50 , 300));
+        scoreTray.setOpaque(false);
+        JPanel scoreBoard = new JPanel(new FlowLayout());
+        scoreBoard.setPreferredSize(new Dimension(50, 150));
+        score1.setPreferredSize(new Dimension(50, 75));
+        score2.setPreferredSize(new Dimension(50, 75));
+        score1.setText(" " + player1.getScore());
+        score2.setText(" " + player2.getScore());
+        score1.setVerticalTextPosition(JLabel.CENTER);
+        score1.setHorizontalTextPosition(JLabel.CENTER);
+        score2.setVerticalTextPosition(JLabel.CENTER);
+        score2.setHorizontalTextPosition(JLabel.CENTER);
+        score1.setFont(new Font("Tahoma", Font.BOLD, 30));
+        score2.setFont(new Font("Tahoma", Font.BOLD, 30));
+        score1.setBackground(new Color(218, 184, 245));
+        score2.setBackground(new Color(184, 245, 210));
+        score1.setOpaque(true);
+        score2.setOpaque(true);
+        scoreBoard.add(score2);
+        scoreBoard.add(score1);
+        JPanel invisibleBox = new JPanel();
+        invisibleBox.setOpaque(false);
+        invisibleBox.setPreferredSize(new Dimension(50, 75));
+        scoreTray.add(invisibleBox);
+        scoreTray.add(scoreBoard);
+        midPanel.add(scoreTray, BorderLayout.WEST);
+        // NOTE: The scores are updated within the buyCard method in class Player
+
+
+        // Pass button:
+        passButton.setPreferredSize(new Dimension(50 , 75));
+        passButton.setFocusable(false);
+        passButton.setBackground(Color.white);
+        passButton.setText("<html>P<br>A<br>S<br>S</html>");
+        scoreTray.add(passButton);
+
+        passButton.addActionListener(Utils.listener);
+
+        
+        
         this.setTitle("Amusement Park");
         this.setIconImage(icon.getImage());
         this.getContentPane().setBackground(Color.white);
