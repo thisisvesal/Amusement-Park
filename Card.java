@@ -20,7 +20,6 @@ public class Card extends JButton {
 
     public Card(int level, int score, String specialCoinColor, Price price, Player owner) {
         this.setPreferredSize(new Dimension(100, 150));
-        // this.setBackground(new Color(247, 246, 195));
         this.setBackground(new Color(232, 249, 250));
         // this.setOpaque(true); not necessary for a button
         this.setFocusable(false);
