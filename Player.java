@@ -1,3 +1,10 @@
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+
 public class Player {
     private String name;
     private int redCoinCount;
@@ -12,14 +19,27 @@ public class Player {
     private int special_blackCoinCount;
     private int goldCoinCount;
     private int reservedCardCount;
+    private boolean hasReservedCardThisRound;
     private Card[] reservedCards = new Card[3];
     private int coinCount;
     private int cardCount;
     public boolean isOn;
     private int score;
+    public final Cursor cursor;
+    private int doneMovesCount;
 
     public Player(String name) {
         this.name = name;
+        if (name == "Player1") {
+            Image icon = new ImageIcon("icons/cursors/purpleSmall.png").getImage();
+            cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon, new Point(0, 0), "cursor1");
+        } else if (name == "Player2") {
+            Image icon = new ImageIcon("icons/cursors/greenSmall.png").getImage();
+            cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon, new Point(0, 0), "cursor1");
+        } else {
+            cursor = Cursor.getDefaultCursor();
+        }
+
     }
 
     public String getName() {
@@ -55,30 +75,12 @@ public class Player {
         return score;
     }
 
-    public void addCoin(Coin coin) {
-        if (coin.color == "red") {
-            redCoinCount++;
-        } else if (coin.color == "blue") {
-            blueCoinCount++;
-        } else if (coin.color == "green") {
-            greenCoinCount++;
-        } else if (coin.color == "blue") {
-            blueCoinCount++;
-        } else if (coin.color == "white") {
-            whiteCoinCount++;
-        } else if (coin.color == "black") {
-            blackCoinCount++;
-        } else if (coin.color == "gold") {
-            goldCoinCount++;
-        }
-    }
-
     public boolean pay(Price price) {
         boolean inProperty = false;
-        if (price.red > 0 && goldCoinCount + redCoinCount + special_redCoinCount > price.red) {
-            if (special_redCoinCount > price.red) {
+        if (price.red > 0 && goldCoinCount + redCoinCount + special_redCoinCount >= price.red) {
+            if (special_redCoinCount >= price.red) {
 
-            } else if (special_redCoinCount + redCoinCount > price.red) {
+            } else if (special_redCoinCount + redCoinCount >= price.red) {
                 redCoinCount -= price.red - special_redCoinCount;
             } else {
                 goldCoinCount -= price.red - redCoinCount - special_redCoinCount;
@@ -86,10 +88,10 @@ public class Player {
             }
             inProperty = true;
         }
-        if (price.blue > 0 && goldCoinCount + blueCoinCount + special_blueCoinCount > price.blue) {
-            if (special_blueCoinCount > price.blue) {
+        if (price.blue > 0 && goldCoinCount + blueCoinCount + special_blueCoinCount >= price.blue) {
+            if (special_blueCoinCount >= price.blue) {
 
-            } else if (special_blueCoinCount + blueCoinCount > price.blue) {
+            } else if (special_blueCoinCount + blueCoinCount >= price.blue) {
                 blueCoinCount -= price.blue - special_blueCoinCount;
             } else {
                 goldCoinCount -= price.blue - blueCoinCount - special_blueCoinCount;
@@ -97,10 +99,10 @@ public class Player {
             }
             inProperty = true;
         }
-        if (price.green > 0 && goldCoinCount + greenCoinCount + special_greenCoinCount > price.green) {
-            if (special_greenCoinCount > price.green) {
+        if (price.green > 0 && goldCoinCount + greenCoinCount + special_greenCoinCount >= price.green) {
+            if (special_greenCoinCount >= price.green) {
 
-            } else if (special_greenCoinCount + greenCoinCount > price.green) {
+            } else if (special_greenCoinCount + greenCoinCount >= price.green) {
                 greenCoinCount -= price.green - special_greenCoinCount;
             } else {
                 goldCoinCount -= price.green - greenCoinCount - special_greenCoinCount;
@@ -108,10 +110,10 @@ public class Player {
             }
             inProperty = true;
         }
-        if (price.black > 0 && goldCoinCount + blackCoinCount + special_blackCoinCount > price.black) {
-            if (special_blackCoinCount > price.black) {
+        if (price.black > 0 && goldCoinCount + blackCoinCount + special_blackCoinCount >= price.black) {
+            if (special_blackCoinCount >= price.black) {
 
-            } else if (special_blackCoinCount + blackCoinCount > price.black) {
+            } else if (special_blackCoinCount + blackCoinCount >= price.black) {
                 blackCoinCount -= price.black - special_blackCoinCount;
             } else {
                 goldCoinCount -= price.black - blackCoinCount - special_blackCoinCount;
@@ -119,10 +121,10 @@ public class Player {
             }
             inProperty = true;
         }
-        if (price.white > 0 && goldCoinCount + whiteCoinCount + special_whiteCoinCount > price.white) {
-            if (special_whiteCoinCount > price.white) {
+        if (price.white > 0 && goldCoinCount + whiteCoinCount + special_whiteCoinCount >= price.white) {
+            if (special_whiteCoinCount >= price.white) {
 
-            } else if (special_whiteCoinCount + whiteCoinCount > price.white) {
+            } else if (special_whiteCoinCount + whiteCoinCount >= price.white) {
                 whiteCoinCount -= price.white - special_whiteCoinCount;
             } else {
                 goldCoinCount -= price.white - whiteCoinCount - special_whiteCoinCount;
@@ -133,67 +135,12 @@ public class Player {
         return inProperty;
     }
 
-    // public Coin spendCoin(String color, int count) {
-    // boolean inProperty = false;
-    // boolean isSpecial = false;
-    // if (color == "red") {
-    // if (special_redCoinCount > 0) {
-    // inProperty = true;
-    // isSpecial = true;
-    // } else if (redCoinCount > 0) {
-    // inProperty = true;
-    // redCoinCount -= count;
-    // }
-    // } else if (color == "blue") {
-    // if (special_blueCoinCount > 0) {
-    // inProperty = true;
-    // isSpecial = true;
-    // } else if (blueCoinCount > 0) {
-    // inProperty = true;
-    // blueCoinCount -= count;
-    // }
-    // } else if (color == "green") {
-    // if (special_greenCoinCount > 0) {
-    // inProperty = true;
-    // isSpecial = true;
-    // } else if (greenCoinCount > 0) {
-    // inProperty = true;
-    // greenCoinCount -= count;
-    // }
-    // } else if (color == "white") {
-    // if (special_whiteCoinCount > 0) {
-    // inProperty = true;
-    // isSpecial = true;
-    // } else if (whiteCoinCount > 0) {
-    // inProperty = true;
-    // whiteCoinCount -= count;
-    // }
-    // } else if (color == "black") {
-    // if (special_blackCoinCount > 0) {
-    // inProperty = true;
-    // isSpecial = true;
-    // } else if (blackCoinCount > 0) {
-    // inProperty = true;
-    // blackCoinCount -= count;
-    // }
-    // } else if (color == "gold") {
-    // if (goldCoinCount > 0) {
-    // inProperty = true;
-    // goldCoinCount -= count;
-    // }
-    // }
-
-    // if (inProperty) {
-    // return new Coin(color, isSpecial, this);
-    // } else {
-    // return null;
-    // }
-    // }
-
     public void buyCard(Card card) {
         if (pay(card.price)) {
             cardCount++;
+            doneMovesCount++;
             this.score += card.score;
+            
             if (card.specialCoin.color == "red") {
                 special_redCoinCount++;
             } else if (card.specialCoin.color == "blue") {
@@ -206,24 +153,77 @@ public class Player {
                 special_whiteCoinCount++;
             }
         }
+        else {
+            System.out.println("\nThe player doesn't have enough money!");
+        }
     }
 
-    public void takeCoinType1(Slot_Machine slotMachine) {
-        slotMachine.giveCoin(this, 1);
+    public void takeCoin(Slot_Machine slotMachine) {
+        slotMachine.press();
+        slotMachine.removeOneCoin();
+        if (slotMachine.color == "red") {
+            redCoinCount++;
+        } else if (slotMachine.color == "blue") {
+            blueCoinCount++;
+        } else if (slotMachine.color == "green") {
+            greenCoinCount++;
+        } else if (slotMachine.color == "white") {
+            whiteCoinCount++;
+        } else if (slotMachine.color == "black") {
+            blackCoinCount++;
+        }
+
+        if (Slot_Machine.isDoneForTheRound() && this.doneMovesCount < 3) {
+            doneMovesCount++;
+            Utils.board.redMachine.setEnabled(false);
+            Utils.board.greenMachine.setEnabled(false);
+            Utils.board.blueMachine.setEnabled(false);
+            Utils.board.whiteMachine.setEnabled(false);
+            Utils.board.blackMachine.setEnabled(false);
+        }
+        
     }
 
-    public void takeCoinType2(Slot_Machine machine1, Slot_Machine machine2, Slot_Machine machine3) {
-        machine1.giveCoin(this, 2);
-        machine2.giveCoin(this, 2);
-        machine3.giveCoin(this, 2);
+    
+
+    public void reserve(Card card) {
+        if (hasReservedCardThisRound || reservedCardCount >= 3) {
+            Utils.popUp("You can't reserve any more cards!");
+        } else {
+            reservedCards[reservedCardCount] = card;
+            reservedCardCount++;
+            hasReservedCardThisRound = true;
+            doneMovesCount++;
+        }
     }
 
-    // public int chooseAction() {
+    public boolean isRoundFinished() {
+        System.out.println("Done moves of " + name + ": " + doneMovesCount);
+        if (doneMovesCount == 3) {
+            return true;
+        }
+        return false;
+    }
 
-    // }
+    public static Player getPlayerOfTheRound() {
+        if (Utils.board.player1.isOn) {
+            return Utils.board.player1;
+        } else if (Utils.board.player2.isOn) {
+            return Utils.board.player2;
+        }
+        return null;
+    }
 
-    public void play() {
+    public void addOneMove() {
+        doneMovesCount++;
+    }
 
+    public void setHasReservedCardThisRound(boolean hasReservedCardThisRound) {
+        this.hasReservedCardThisRound = hasReservedCardThisRound;
+    }
+
+    public void setDoneMovesCount(int doneMovesCount) {
+        this.doneMovesCount = doneMovesCount;
     }
 
 }
