@@ -58,128 +58,152 @@ public class Player {
     public void addCoin(Coin coin) {
         if (coin.color == "red") {
             redCoinCount++;
-            if (coin.isSpecial) {
-                special_redCoinCount++;
-            }
-
         } else if (coin.color == "blue") {
             blueCoinCount++;
-            if (coin.isSpecial) {
-                special_blueCoinCount++;
-            }
-
         } else if (coin.color == "green") {
             greenCoinCount++;
-            if (coin.isSpecial) {
-                special_greenCoinCount++;
-            }
-
         } else if (coin.color == "blue") {
             blueCoinCount++;
-            if (coin.isSpecial) {
-                special_blueCoinCount++;
-            }
-
         } else if (coin.color == "white") {
             whiteCoinCount++;
-            if (coin.isSpecial) {
-                special_whiteCoinCount++;
-            }
-
         } else if (coin.color == "black") {
             blackCoinCount++;
-            if (coin.isSpecial) {
-                special_blackCoinCount++;
-            }
-
         } else if (coin.color == "gold") {
             goldCoinCount++;
-
         }
     }
 
-    public Coin spendCoin(String color, int count) {
+    public boolean pay(Price price) {
         boolean inProperty = false;
-        boolean isSpecial = false;
-        if (color == "red") {
-            if (special_redCoinCount > 0) {
-                inProperty = true;
-                isSpecial = true;
-            } else if (redCoinCount > 0) {
-                inProperty = true;
-                redCoinCount -= count;
-            }
-        } else if (color == "blue") {
-            if (special_blueCoinCount > 0) {
-                inProperty = true;
-                isSpecial = true;
-            } else if (blueCoinCount > 0) {
-                inProperty = true;
-                blueCoinCount -= count;
-            }
-        } else if (color == "green") {
-            if (special_greenCoinCount > 0) {
-                inProperty = true;
-                isSpecial = true;
-            } else if (greenCoinCount > 0) {
-                inProperty = true;
-                greenCoinCount -= count;
-            }
-        } else if (color == "white") {
-            if (special_whiteCoinCount > 0) {
-                inProperty = true;
-                isSpecial = true;
-            } else if (whiteCoinCount > 0) {
-                inProperty = true;
-                whiteCoinCount -= count;
-            }
-        } else if (color == "black") {
-            if (special_blackCoinCount > 0) {
-                inProperty = true;
-                isSpecial = true;
-            } else if (blackCoinCount > 0) {
-                inProperty = true;
-                blackCoinCount -= count;
-            }
-        } else if (color == "gold") {
-            if (goldCoinCount > 0) {
-                inProperty = true;
-                goldCoinCount -= count;
-            }
-        }
+        if (price.red > 0 && goldCoinCount + redCoinCount + special_redCoinCount > price.red) {
+            if (special_redCoinCount > price.red) {
 
-        if (inProperty) {
-            return new Coin(color, isSpecial, this);
-        } else {
-            return null;
+            } else if (special_redCoinCount + redCoinCount > price.red) {
+                redCoinCount -= price.red - special_redCoinCount;
+            } else {
+                goldCoinCount -= price.red - redCoinCount - special_redCoinCount;
+                redCoinCount = 0;
+            }
+            inProperty = true;
         }
+        if (price.blue > 0 && goldCoinCount + blueCoinCount + special_blueCoinCount > price.blue) {
+            if (special_blueCoinCount > price.blue) {
+
+            } else if (special_blueCoinCount + blueCoinCount > price.blue) {
+                blueCoinCount -= price.blue - special_blueCoinCount;
+            } else {
+                goldCoinCount -= price.blue - blueCoinCount - special_blueCoinCount;
+                blueCoinCount = 0;
+            }
+            inProperty = true;
+        }
+        if (price.green > 0 && goldCoinCount + greenCoinCount + special_greenCoinCount > price.green) {
+            if (special_greenCoinCount > price.green) {
+
+            } else if (special_greenCoinCount + greenCoinCount > price.green) {
+                greenCoinCount -= price.green - special_greenCoinCount;
+            } else {
+                goldCoinCount -= price.green - greenCoinCount - special_greenCoinCount;
+                greenCoinCount = 0;
+            }
+            inProperty = true;
+        }
+        if (price.black > 0 && goldCoinCount + blackCoinCount + special_blackCoinCount > price.black) {
+            if (special_blackCoinCount > price.black) {
+
+            } else if (special_blackCoinCount + blackCoinCount > price.black) {
+                blackCoinCount -= price.black - special_blackCoinCount;
+            } else {
+                goldCoinCount -= price.black - blackCoinCount - special_blackCoinCount;
+                blackCoinCount = 0;
+            }
+            inProperty = true;
+        }
+        if (price.white > 0 && goldCoinCount + whiteCoinCount + special_whiteCoinCount > price.white) {
+            if (special_whiteCoinCount > price.white) {
+
+            } else if (special_whiteCoinCount + whiteCoinCount > price.white) {
+                whiteCoinCount -= price.white - special_whiteCoinCount;
+            } else {
+                goldCoinCount -= price.white - whiteCoinCount - special_whiteCoinCount;
+                whiteCoinCount = 0;
+            }
+            inProperty = true;
+        }
+        return inProperty;
     }
+
+    // public Coin spendCoin(String color, int count) {
+    // boolean inProperty = false;
+    // boolean isSpecial = false;
+    // if (color == "red") {
+    // if (special_redCoinCount > 0) {
+    // inProperty = true;
+    // isSpecial = true;
+    // } else if (redCoinCount > 0) {
+    // inProperty = true;
+    // redCoinCount -= count;
+    // }
+    // } else if (color == "blue") {
+    // if (special_blueCoinCount > 0) {
+    // inProperty = true;
+    // isSpecial = true;
+    // } else if (blueCoinCount > 0) {
+    // inProperty = true;
+    // blueCoinCount -= count;
+    // }
+    // } else if (color == "green") {
+    // if (special_greenCoinCount > 0) {
+    // inProperty = true;
+    // isSpecial = true;
+    // } else if (greenCoinCount > 0) {
+    // inProperty = true;
+    // greenCoinCount -= count;
+    // }
+    // } else if (color == "white") {
+    // if (special_whiteCoinCount > 0) {
+    // inProperty = true;
+    // isSpecial = true;
+    // } else if (whiteCoinCount > 0) {
+    // inProperty = true;
+    // whiteCoinCount -= count;
+    // }
+    // } else if (color == "black") {
+    // if (special_blackCoinCount > 0) {
+    // inProperty = true;
+    // isSpecial = true;
+    // } else if (blackCoinCount > 0) {
+    // inProperty = true;
+    // blackCoinCount -= count;
+    // }
+    // } else if (color == "gold") {
+    // if (goldCoinCount > 0) {
+    // inProperty = true;
+    // goldCoinCount -= count;
+    // }
+    // }
+
+    // if (inProperty) {
+    // return new Coin(color, isSpecial, this);
+    // } else {
+    // return null;
+    // }
+    // }
 
     public void buyCard(Card card) {
-        if (card.price.red > 0) {
-            if (spendCoin("red", card.price.red) != null) {
-                cardCount++;
-                this.score += card.score;
-            }
-        } else if (card.price.blue > 0) {
-            if (spendCoin("blue", card.price.blue) != null) {
-                cardCount++;
-                this.score += card.score;
-            }
-        } else if (card.price.green > 0) {
-            if (spendCoin("green", card.price.green) != null) {
-                cardCount++;
-                this.score += card.score;
-            }
-        } else if (card.price.white > 0) {
-            if (spendCoin("white", card.price.white) != null) {
-                cardCount++;
-                this.score += card.score;
-            }
-        } else if (card.price.black > 0) {
-            if (spendCoin("black", card.price.black) != null) {
-                cardCount++;
-                this.score += card.score;
+        if (pay(card.price)) {
+            cardCount++;
+            this.score += card.score;
+            if (card.specialCoin.color == "red") {
+                special_redCoinCount++;
+            } else if (card.specialCoin.color == "blue") {
+                special_blueCoinCount++;
+            } else if (card.specialCoin.color == "green") {
+                special_greenCoinCount++;
+            } else if (card.specialCoin.color == "black") {
+                special_blackCoinCount++;
+            } else if (card.specialCoin.color == "white") {
+                special_whiteCoinCount++;
             }
         }
     }
