@@ -25,6 +25,7 @@ public class Slot_Machine extends JButton {
     }
 
     public void removeOneCoin() {
+        Utils.board.banker.takeCoin(this);
         coinCount--;
         if (this.coinCount == 0) {
             this.setEnabled(false);
