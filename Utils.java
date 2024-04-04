@@ -1,3 +1,7 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 public class Utils {
     public static final AListener listener = new AListener();
     public static final MListener mouseListener = new MListener();
@@ -5,7 +9,11 @@ public class Utils {
     private static Card pressedCard;
 
     public static void arrangeCards() {
-        
+
+    }
+
+    public static void replace(Card card) {
+
     }
 
     public static void setPressedCard(Card card) {
@@ -14,7 +22,7 @@ public class Utils {
 
     public static Card getPressedCard() {
         if (pressedCard != null) {
-            System.out.println("getPressed reports " + pressedCard.specialCoin.color + " card as pressed");
+            System.out.println("getPressed reports " + pressedCard.superCoin.color + " card as pressed");
         } else {
             System.out.println("getPressed reports null card as pressed");
         }
@@ -40,7 +48,7 @@ public class Utils {
 
     public static void popUp(String message) {
         // Should popup a message
-        System.out.println("\nPOPUP MESSAGE\n");
+        System.out.println("\npop up: " + message + "\n");
     }
 
     public static void refreshBoard() {
@@ -58,14 +66,26 @@ public class Utils {
         board.whiteCoin2.setText("" + board.player2.getCoinCount("white"));
         board.goldCoin2.setText("" + board.player2.getCoinCount("gold"));
 
+        board.superGreenCoin1.setText("" + board.player1.getSuperCoinCount("green"));
+        board.superRedCoin1.setText("" + board.player1.getSuperCoinCount("red"));
+        board.superBlueCoin1.setText("" + board.player1.getSuperCoinCount("blue"));
+        board.superBlackCoin1.setText("" + board.player1.getSuperCoinCount("black"));
+        board.superWhiteCoin1.setText("" + board.player1.getSuperCoinCount("white"));
+
+        board.superGreenCoin2.setText("" + board.player2.getSuperCoinCount("green"));
+        board.superRedCoin2.setText("" + board.player2.getSuperCoinCount("red"));
+        board.superBlueCoin2.setText("" + board.player2.getSuperCoinCount("blue"));
+        board.superBlackCoin2.setText("" + board.player2.getSuperCoinCount("black"));
+        board.superWhiteCoin2.setText("" + board.player2.getSuperCoinCount("white"));
+
         board.redMachine.setText("" + board.redMachine.getCoinCount());
         board.greenMachine.setText("" + board.greenMachine.getCoinCount());
         board.blueMachine.setText("" + board.blueMachine.getCoinCount());
         board.blackMachine.setText("" + board.blackMachine.getCoinCount());
         board.whiteMachine.setText("" + board.whiteMachine.getCoinCount());
 
-        board.score1.setText("" + board.player1.getScore());
-        board.score2.setText("" + board.player2.getScore());
+        board.score1.setText(" " + board.player1.getScore());
+        board.score2.setText(" " + board.player2.getScore());
 
     }
 
@@ -76,5 +96,11 @@ public class Utils {
             return board.player2;
         }
         return null;
+    }
+
+    public static ImageIcon getResizedIcon(ImageIcon icon, int width, int height) {
+        Image image = icon.getImage();
+        Image resizedImage = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
 }

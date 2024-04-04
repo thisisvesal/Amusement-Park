@@ -1,7 +1,7 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Coin extends JLabel{
+public class Coin extends JLabel {
     final String color;
     final boolean isSpecial;
     private Player owner;
@@ -10,8 +10,13 @@ public class Coin extends JLabel{
         this.color = color;
         this.isSpecial = isSpecial;
         this.owner = owner;
-        this.setIcon(new ImageIcon("icons/coins/" + color + ".png"));
-        this.setText("" + owner.getCoinCount(color));
+        if (isSpecial) {
+            this.setIcon(Utils.getResizedIcon(new ImageIcon("icons/supercoins/" + color + ".png"), 40, 40));
+            this.setText("" + owner.getSuperCoinCount(color));
+        } else {
+            this.setIcon(Utils.getResizedIcon(new ImageIcon("icons/coins/" + color + ".png"), 40, 40));
+            this.setText("" + owner.getCoinCount(color));
+        }
         this.setVerticalTextPosition(JLabel.BOTTOM);
         this.setHorizontalTextPosition(JLabel.CENTER);
     }
@@ -26,8 +31,7 @@ public class Coin extends JLabel{
     }
 
     public Coin(String color) {
-        this.color = color;
-        this.isSpecial = false;
+        this(color, false, Utils.board.banker);
     }
 
     public void setOwner(Player player) {

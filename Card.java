@@ -1,19 +1,19 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Card extends JPanel {
     public final int level;
-    public final Coin specialCoin;
+    public final Coin superCoin;
     public final int score;
     private Player owner;
     private boolean reserved;
     public final Price price;
     public final CardButton button;
+    public final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     public final JButton buyButton = new JButton("buy");
     public final JButton reserveButton = new JButton("reserve");
 
@@ -29,18 +29,17 @@ public class Card extends JPanel {
     }
 
     // Constructing normal cards:
-    public Card(int level, int score, String specialCoinColor, Price price, Player owner) {
+    public Card(int level, int score, String superCoinColor, Price price, Player owner) {
         this.setPreferredSize(new Dimension(150, 190));
         this.setOpaque(false);
         this.setBackground(Color.red);
         this.level = level;
         this.score = score;
         this.owner = owner;
-        this.specialCoin = new Coin(specialCoinColor, true, owner);
+        this.superCoin = new Coin(superCoinColor, true, owner);
         this.price = price;
         this.button = new CardButton(this);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.setOpaque(false);
         buttonPanel.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(buyButton);

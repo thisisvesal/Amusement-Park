@@ -50,9 +50,9 @@ public class AListener implements ActionListener {
             Utils.board.repaint();
         } else if (Utils.getPressedCard() != null && e.getSource() == Utils.getPressedCard().reserveButton) {
             System.out.println("reserve button ");
-            Utils.getPlayerOfTheRound().reserve(Utils.getPressedCard());
             Utils.getPressedCard().reserveButton.setVisible(false);
             Utils.getPressedCard().buyButton.setVisible(false);
+            Utils.getPlayerOfTheRound().reserve(Utils.getPressedCard());
             Utils.setPressedCard(null);
             Utils.board.revalidate();
             Utils.board.repaint();
