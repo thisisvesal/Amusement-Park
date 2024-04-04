@@ -140,6 +140,7 @@ public class Player {
             cardCount++;
             doneMovesCount++;
             this.score += card.score;
+            card.setOwner(this);
             
             if (card.specialCoin.color == "red") {
                 special_redCoinCount++;
@@ -203,15 +204,6 @@ public class Player {
             return true;
         }
         return false;
-    }
-
-    public static Player getPlayerOfTheRound() {
-        if (Utils.board.player1.isOn) {
-            return Utils.board.player1;
-        } else if (Utils.board.player2.isOn) {
-            return Utils.board.player2;
-        }
-        return null;
     }
 
     public void addOneMove() {

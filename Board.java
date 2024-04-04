@@ -15,13 +15,13 @@ public class Board extends JFrame {
     public final JPanel midPanel = new JPanel();
     public final JPanel player1Panel = new JPanel();
     public final JPanel player2Panel = new JPanel();
-    public final Player player1 = new Player("Player1");
+    public final Player player1 = new Player("Player1"); {player1.isOn = true;}
     public final Player player2 = new Player("Player2");
     public final Player banker = new Player("Banker");
-    public final JButton buyButton1 = new JButton("buy");
-    public final JButton buyButton2 = new JButton("buy");
-    public final JButton reserveButton1 = new JButton("reserve");
-    public final JButton reserveButton2 = new JButton("reserve");
+    // public final JButton buyButton1 = new JButton("buy");
+    // public final JButton buyButton2 = new JButton("buy");
+    // public final JButton reserveButton1 = new JButton("reserve");
+    // public final JButton reserveButton2 = new JButton("reserve");
 
     public final Coin greenCoin1;
     public final Coin redCoin1;
@@ -55,27 +55,32 @@ public class Board extends JFrame {
 
     public Board() {
         this.addMouseMotionListener(Utils.mouseListener);
-        player1.isOn = true;
         icon = new ImageIcon("icons/icon.png");
 
+        JPanel playersPanel = new JPanel(new BorderLayout(10, 0));
+        playersPanel.setOpaque(false);
+        playersPanel.setPreferredSize(new Dimension(1200, 200));
+        playersPanel.add(player1Panel, BorderLayout.WEST);
+        playersPanel.add(player2Panel, BorderLayout.EAST);
+
         midPanel.setLayout(new BorderLayout(0, 0));
-        player1Panel.setLayout(new FlowLayout());
-        player2Panel.setLayout(new FlowLayout());
+        player1Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        player2Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 
         player1Panel.setBackground(Color.white);
         player2Panel.setBackground(Color.white);
         midPanel.setBackground(new Color(119, 232, 247));
 
-        midPanel.setPreferredSize(new Dimension(1200, 400));
-        player1Panel.setPreferredSize(new Dimension(1200, 200));
-        player2Panel.setPreferredSize(new Dimension(1200, 200));
+        midPanel.setPreferredSize(new Dimension(1200, 600));
+        player1Panel.setPreferredSize(new Dimension(595, 200));
+        player2Panel.setPreferredSize(new Dimension(595, 200));
 
         JPanel coinPanel1 = new JPanel();
         JPanel coinPanel2 = new JPanel();
         coinPanel1.setBackground(new Color(218, 184, 245));
         coinPanel2.setBackground(new Color(184, 245, 210));
-        coinPanel1.setPreferredSize(new Dimension(295, 200));
-        coinPanel2.setPreferredSize(new Dimension(295, 200));
+        coinPanel1.setPreferredSize(new Dimension(290, 200));
+        coinPanel2.setPreferredSize(new Dimension(290, 200));
 
         JPanel ownedCardPanel1 = new JPanel();
         JPanel reservedCardPanel1 = new JPanel();
@@ -87,13 +92,13 @@ public class Board extends JFrame {
         reservedCardPanel2.setBackground(new Color(184, 245, 210));
         ownedCardPanel1.setPreferredSize(new Dimension(575, 200));
         ownedCardPanel2.setPreferredSize(new Dimension(575, 200));
-        reservedCardPanel1.setPreferredSize(new Dimension(300, 200));
-        reservedCardPanel2.setPreferredSize(new Dimension(300, 200));
+        reservedCardPanel1.setPreferredSize(new Dimension(295, 200));
+        reservedCardPanel2.setPreferredSize(new Dimension(295, 200));
 
         player1Panel.add(reservedCardPanel1);
         player2Panel.add(reservedCardPanel2);
-        player1Panel.add(ownedCardPanel1);
-        player2Panel.add(ownedCardPanel2);
+        // player1Panel.add(ownedCardPanel1);
+        // player2Panel.add(ownedCardPanel2);
         player1Panel.add(coinPanel1);
         player2Panel.add(coinPanel2);
 
@@ -132,7 +137,7 @@ public class Board extends JFrame {
 
         JPanel slotMachinePanel = new JPanel();
         slotMachinePanel.setBackground(new Color(119, 232, 247));
-        slotMachinePanel.setPreferredSize(new Dimension(300, 400));
+        slotMachinePanel.setPreferredSize(new Dimension(300, 600));
         slotMachinePanel.add(redMachine);
         slotMachinePanel.add(greenMachine);
         slotMachinePanel.add(blueMachine);
@@ -142,7 +147,7 @@ public class Board extends JFrame {
 
         JPanel cardMidPanel = new JPanel();
         cardMidPanel.setLayout(new FlowLayout());
-        cardMidPanel.setPreferredSize(new Dimension(900, 400));
+        cardMidPanel.setPreferredSize(new Dimension(900, 600));
         cardMidPanel.setBackground(new Color(119, 232, 247));
 
         // ---------------------------- TEST CARD
@@ -150,9 +155,9 @@ public class Board extends JFrame {
         Card someCard = new Card(1, 1, "white", new Price(1, 0, 1, 0, 0), banker);
         cardMidPanel.add(someCard);
 
-        midPanel.add(cardMidPanel, BorderLayout.CENTER);
-
         // -------------------------------------------------------------------------------------------------------------------
+
+        midPanel.add(cardMidPanel, BorderLayout.CENTER);
 
         prizeclawCards[0] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
         prizeclawCards[1] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
@@ -189,28 +194,9 @@ public class Board extends JFrame {
             lvl3Cards[i] = new Card(3, 4, "red", new Price(5, 3, 0, 1, 0), banker);
         }
         // -------------------------------------------------------------------------------------------------------------------
-        // Reserve/Buy buttons:
-        buyButton1.setFocusable(false);
-        ownedCardPanel1.add(buyButton1, BorderLayout.NORTH);
-        buyButton1.setVisible(false);
-        buyButton1.addActionListener(Utils.listener);
-        buyButton2.setFocusable(false);
-        ownedCardPanel2.add(buyButton2, BorderLayout.SOUTH);
-        buyButton2.setVisible(false);
-        buyButton2.addActionListener(Utils.listener);
-
-        reserveButton1.setFocusable(false);
-        ownedCardPanel1.add(reserveButton1, BorderLayout.NORTH);
-        reserveButton1.setVisible(false);
-        reserveButton1.addActionListener(Utils.listener);
-        reserveButton2.setFocusable(false);
-        ownedCardPanel2.add(reserveButton2, BorderLayout.SOUTH);
-        reserveButton2.setVisible(false);
-        reserveButton2.addActionListener(Utils.listener);
-
         // The score board:
         JPanel scoreTray = new JPanel(new FlowLayout());
-        scoreTray.setPreferredSize(new Dimension(50 , 300));
+        scoreTray.setPreferredSize(new Dimension(50, 300));
         scoreTray.setOpaque(false);
         JPanel scoreBoard = new JPanel(new FlowLayout());
         scoreBoard.setPreferredSize(new Dimension(50, 150));
@@ -238,29 +224,26 @@ public class Board extends JFrame {
         midPanel.add(scoreTray, BorderLayout.WEST);
         // NOTE: The scores are updated within the buyCard method in class Player
 
-
         // Pass button:
-        passButton.setPreferredSize(new Dimension(50 , 75));
+        passButton.setPreferredSize(new Dimension(50, 75));
         passButton.setFocusable(false);
         passButton.setBackground(Color.white);
         passButton.setText("<html>P<br>A<br>S<br>S</html>");
+        passButton.addActionListener(Utils.listener);
         scoreTray.add(passButton);
 
-        passButton.addActionListener(Utils.listener);
+        
 
-        
-        
         this.setTitle("Amusement Park");
         this.setIconImage(icon.getImage());
         this.getContentPane().setBackground(Color.white);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1200, 800);
+        this.setSize(1220, 800);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
-        this.setLayout(new BorderLayout(20, 20));
+        this.setLayout(new FlowLayout());
         this.setVisible(true);
-        this.add(midPanel, BorderLayout.CENTER);
-        this.add(player1Panel, BorderLayout.SOUTH);
-        this.add(player2Panel, BorderLayout.NORTH);
+        this.add(midPanel);
+        this.add(playersPanel);
     }
 }

@@ -1,19 +1,23 @@
 public class Utils {
-    public static final AListener listener = new AListener(); 
+    public static final AListener listener = new AListener();
     public static final MListener mouseListener = new MListener();
     public static final Board board = new Board();
     private static Card pressedCard;
 
     public static void arrangeCards() {
-
+        
     }
 
-    public static void setPressedCard(Card card) { // Add this to class Card maybe
+    public static void setPressedCard(Card card) {
         Utils.pressedCard = card;
     }
 
     public static Card getPressedCard() {
-        System.out.println("getPressed reports " + pressedCard + " card as pressed");
+        if (pressedCard != null) {
+            System.out.println("getPressed reports " + pressedCard.specialCoin.color + " card as pressed");
+        } else {
+            System.out.println("getPressed reports null card as pressed");
+        }
         return pressedCard;
     }
 
@@ -62,6 +66,15 @@ public class Utils {
 
         board.score1.setText("" + board.player1.getScore());
         board.score2.setText("" + board.player2.getScore());
-        
+
+    }
+
+    public static Player getPlayerOfTheRound() {
+        if (board.player1.isOn) {
+            return board.player1;
+        } else if (board.player2.isOn) {
+            return board.player2;
+        }
+        return null;
     }
 }
