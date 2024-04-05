@@ -26,10 +26,6 @@ public class Board extends JFrame {
         banker.setCoinCount("black", 4);
         banker.setCoinCount("gold", 5);
     }
-    // public final JButton buyButton1 = new JButton("buy");
-    // public final JButton buyButton2 = new JButton("buy");
-    // public final JButton reserveButton1 = new JButton("reserve");
-    // public final JButton reserveButton2 = new JButton("reserve");
 
     public final Coin greenCoin1;
     public final Coin redCoin1;
@@ -63,6 +59,11 @@ public class Board extends JFrame {
     public final Card[] lvl1Cards = new Card[15];
     public final Card[] lvl2Cards = new Card[15];
     public final Card[] lvl3Cards = new Card[15];
+
+    public final JPanel prizeclawPanel = new JPanel();
+    public final JPanel lvl1Panel = new JPanel();
+    public final JPanel lvl2Panel = new JPanel();
+    public final JPanel lvl3Panel = new JPanel();
 
     public final JLabel score1 = new JLabel();
     public final JLabel score2 = new JLabel();
@@ -206,14 +207,35 @@ public class Board extends JFrame {
         slotMachinePanel.add(blackMachine);
         midPanel.add(slotMachinePanel, BorderLayout.EAST);
 
-        cardMidPanel.setLayout(new FlowLayout());
+        cardMidPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
         cardMidPanel.setPreferredSize(new Dimension(900, 500));
         cardMidPanel.setBackground(new Color(119, 232, 247));
+
+        prizeclawPanel.setPreferredSize(new Dimension(200, 500));
+        lvl1Panel.setPreferredSize(new Dimension(200, 500));
+        lvl2Panel.setPreferredSize(new Dimension(200, 500));
+        lvl3Panel.setPreferredSize(new Dimension(200, 500));
+
+        prizeclawPanel.setOpaque(false);
+        lvl1Panel.setOpaque(false);
+        lvl2Panel.setOpaque(false);
+        lvl3Panel.setOpaque(false);
+
+        // For testing purposes, although they're in visible:
+        prizeclawPanel.setBackground(Color.red);
+        lvl1Panel.setBackground(Color.blue);
+        lvl2Panel.setBackground(Color.magenta);
+        lvl3Panel.setBackground(Color.yellow);
+
+        cardMidPanel.add(prizeclawPanel);
+        cardMidPanel.add(lvl1Panel);
+        cardMidPanel.add(lvl2Panel);
+        cardMidPanel.add(lvl3Panel);
 
         // ---------------------------- TEST CARD
         // ----------------------------------------------------------------------------
         Card someCard = new Card(1, 1, "white", new Price(1, 0, 1, 0, 0), banker);
-        cardMidPanel.add(someCard);
+        lvl1Panel.add(someCard);
 
         // -------------------------------------------------------------------------------------------------------------------
 
