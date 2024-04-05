@@ -216,7 +216,7 @@ public class Player {
                 superWhiteCoinCount++;
             }
         } else {
-            Utils.popUp("The player can't buy this card!");
+            Utils.popUp("You can't buy this card!");
         }
     }
 
