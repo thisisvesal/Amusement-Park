@@ -48,6 +48,20 @@ public class Slot_Machine extends JButton {
         return false;
     }
 
+    public boolean wasPressedThisRound() {
+        for (int i = 0; i < pressedMachines.length; i++) {
+            if (this == pressedMachines[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static int getPressedMachineCount() {
+        return pressedMachineCount;
+    }
+
     public void press() {
         pressedMachines[pressedMachineCount] = this;
         pressedMachineCount++;

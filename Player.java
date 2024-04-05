@@ -94,7 +94,8 @@ public class Player {
         } else if (color == "white") {
             return superWhiteCoinCount;
         } else if (color == "all") {
-            return superRedCoinCount + superBlueCoinCount + superGreenCoinCount + superWhiteCoinCount + superBlackCoinCount;
+            return superRedCoinCount + superBlueCoinCount + superGreenCoinCount + superWhiteCoinCount
+                    + superBlackCoinCount;
         }
         return 0;
     }
@@ -219,32 +220,44 @@ public class Player {
         }
     }
 
-    public void takeCoin(Slot_Machine slotMachine) {
-        if (getCoinCount("all") < 10) {
-            slotMachine.press();
-            slotMachine.removeOneCoin();
-            if (slotMachine.color == "red") {
-                redCoinCount++;
-            } else if (slotMachine.color == "blue") {
-                blueCoinCount++;
-            } else if (slotMachine.color == "green") {
-                greenCoinCount++;
-            } else if (slotMachine.color == "white") {
-                whiteCoinCount++;
-            } else if (slotMachine.color == "black") {
-                blackCoinCount++;
-            }
-
-            if (Slot_Machine.isDoneForTheRound() && this.doneMovesCount < 3) {
-                doneMovesCount++;
-                Utils.board.redMachine.setEnabled(false);
-                Utils.board.greenMachine.setEnabled(false);
-                Utils.board.blueMachine.setEnabled(false);
-                Utils.board.whiteMachine.setEnabled(false);
-                Utils.board.blackMachine.setEnabled(false);
-            }
+    public boolean doubleCoinRequestedFrom(Slot_Machine slotMachine) {
+        if (Slot_Machine.getPressedMachineCount() > 1 && slotMachine.wasPressedThisRound()) {
+            return true;
         } else {
-            Utils.popUp("You can't have more than 10 coins at once!");
+            return false;
+        }
+    }
+
+    public void takeCoin(Slot_Machine slotMachine) {
+        if (this.name != "Banker") {
+            if (getCoinCount("all") < 10 && !doubleCoinRequestedFrom(slotMachine)) {
+                slotMachine.press();
+                slotMachine.removeOneCoin();
+                if (slotMachine.color == "red") {
+                    redCoinCount++;
+                } else if (slotMachine.color == "blue") {
+                    blueCoinCount++;
+                } else if (slotMachine.color == "green") {
+                    greenCoinCount++;
+                } else if (slotMachine.color == "white") {
+                    whiteCoinCount++;
+                } else if (slotMachine.color == "black") {
+                    blackCoinCount++;
+                }
+
+                if (Slot_Machine.isDoneForTheRound() && this.doneMovesCount < 3) {
+                    doneMovesCount++;
+                    Utils.board.redMachine.setEnabled(false);
+                    Utils.board.greenMachine.setEnabled(false);
+                    Utils.board.blueMachine.setEnabled(false);
+                    Utils.board.whiteMachine.setEnabled(false);
+                    Utils.board.blackMachine.setEnabled(false);
+                }
+            } else if (getCoinCount("all") >= 10) {
+                Utils.popUp("You can't have more than 10 coins at once!");
+            } else if (doubleCoinRequestedFrom(slotMachine)) {
+                Utils.popUp("You just took a coin from here, choose another machine");
+            }
         }
 
     }
@@ -269,13 +282,13 @@ public class Player {
             card.buttonPanel.remove(card.reserveButton);
             card.buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             card.setPreferredSize(new Dimension(110, 190));
-            
+
             if (Utils.board.banker.goldCoinCount > 0) {
-                Utils.board.banker.goldCoinCount --;
+                Utils.board.banker.goldCoinCount--;
                 goldCoinCount++;
                 System.out.println(this.name + "'s gold coin count is " + goldCoinCount);
             }
-            
+
         }
     }
 
