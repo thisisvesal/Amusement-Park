@@ -123,7 +123,6 @@ public class CardButton extends JButton {
                 }
             }
 
-            // this.add(superCoinPanel, BorderLayout.NORTH);
         } else {
             superCoinPanel.setPreferredSize(new Dimension(95, 20));
             toyPanel.setPreferredSize(new Dimension(95, 60));
