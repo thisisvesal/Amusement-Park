@@ -30,7 +30,7 @@ public class Card extends JPanel {
 
     // Constructing normal cards:
     public Card(int level, int score, String superCoinColor, Price price, Player owner) {
-        this.setPreferredSize(new Dimension(150, 190));
+        this.setPreferredSize(new Dimension(150, 160));
         this.setOpaque(false);
         this.setBackground(Color.red);
         this.level = level;

@@ -12,13 +12,12 @@ import javax.swing.JPanel;
 
 public class CardButton extends JButton {
     public final Card card;
-    public CardButton(Card card)
-    {
+
+    public CardButton(Card card) {
         this.card = card;
-        this.setPreferredSize(new Dimension(110, 180));
         this.setOpaque(true);
         this.setBackground(Color.red);
-        this.setPreferredSize(new Dimension(100, 150));
+        this.setPreferredSize(new Dimension(110, 120));
         this.setBackground(new Color(232, 249, 250));
         this.setFocusable(false);
         this.setLayout(new BorderLayout(0, 0));
@@ -41,9 +40,9 @@ public class CardButton extends JButton {
         superCoinPanel.setPreferredSize(new Dimension(95, 33));
         superCoinPanel.setOpaque(false);
         superCoinPanel.add(scoreLabel);
-        toyPanel.setPreferredSize(new Dimension(95, 50));
+        toyPanel.setPreferredSize(new Dimension(95, 40));
         toyPanel.setOpaque(false);
-        pricePanel.setPreferredSize(new Dimension(95, 33));
+        pricePanel.setPreferredSize(new Dimension(110, 33));
         pricePanel.setOpaque(false);
 
         if (card.level != 0) {
@@ -57,21 +56,21 @@ public class CardButton extends JButton {
                 if (card.superCoin.color == "white") {
                     toyIcon = new ImageIcon("icons/cards/1circus.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "blue") {
                     toyIcon = new ImageIcon("icons/cards/1magician.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "green") {
                     toyIcon = new ImageIcon("icons/cards/1merrygoround.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
@@ -80,21 +79,21 @@ public class CardButton extends JButton {
                 if (card.superCoin.color == "white") {
                     toyIcon = new ImageIcon("icons/cards/2ferriswheel.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "blue") {
                     toyIcon = new ImageIcon("icons/cards/2rings.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "green") {
                     toyIcon = new ImageIcon("icons/cards/2trampoline.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
@@ -103,21 +102,21 @@ public class CardButton extends JButton {
                 if (card.superCoin.color == "green") {
                     toyIcon = new ImageIcon("icons/cards/3bumpercar.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "blue") {
                     toyIcon = new ImageIcon("icons/cards/3rollercoaster.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
                 } else if (card.superCoin.color == "red") {
                     toyIcon = new ImageIcon("icons/cards/3houseofmirrors.png");
                     image = toyIcon.getImage();
-                    resizedImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+                    resizedImage = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
                     toyIcon = new ImageIcon(resizedImage);
                     toyLabel = new JLabel(toyIcon);
                     toyPanel.add(toyLabel);
@@ -126,9 +125,13 @@ public class CardButton extends JButton {
 
             // this.add(superCoinPanel, BorderLayout.NORTH);
         } else {
+            superCoinPanel.setPreferredSize(new Dimension(95, 20));
+            toyPanel.setPreferredSize(new Dimension(95, 60));
+            pricePanel.setPreferredSize(new Dimension(110, 33));
+
             toyIcon = new ImageIcon("icons/cards/prizeclaw.png");
             Image image = toyIcon.getImage();
-            Image resizedImage = image.getScaledInstance(65, 65, java.awt.Image.SCALE_SMOOTH);
+            Image resizedImage = image.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
             toyIcon = new ImageIcon(resizedImage);
             toyLabel = new JLabel(toyIcon);
             toyPanel.add(toyLabel);
