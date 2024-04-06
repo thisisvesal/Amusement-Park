@@ -7,6 +7,10 @@ public class Main {
         // Card lvl3Cards[] = new Card[15];
 
         Board board = Utils.board;
+        Utils.arrangeCards();
+        Utils.refreshBoard();
+
+        System.out.println(board.getTitle());
 
         // Player player1 = board.player1;
         // Player player2 = board.player2;

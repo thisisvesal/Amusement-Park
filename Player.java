@@ -200,7 +200,15 @@ public class Player {
                     Utils.board.reservedCardPanel2.remove(card);
                 }
             } else {
-                Utils.board.cardMidPanel.remove(card);
+                if (card.level == 0) {
+                    Utils.board.prizeclawPanel.remove(card);
+                } else if (card.level == 1) {
+                    Utils.board.lvl1Panel.remove(card);
+                } else if (card.level == 2) {
+                    Utils.board.lvl2Panel.remove(card);
+                } else if (card.level == 3) {
+                    Utils.board.lvl3Panel.remove(card);
+                }
                 Utils.replace(card);
             }
 
@@ -281,7 +289,8 @@ public class Player {
 
             card.buttonPanel.remove(card.reserveButton);
             card.buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            card.setPreferredSize(new Dimension(110, 190));
+            card.setPreferredSize(new Dimension(100, 160));
+            card.buttonPanel.setPreferredSize(new Dimension(100, 30));
 
             if (Utils.board.banker.goldCoinCount > 0) {
                 Utils.board.banker.goldCoinCount--;

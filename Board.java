@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,10 +56,10 @@ public class Board extends JFrame {
     public final Coin superBlueCoin2;
     public final Coin[] allSuperCoins2 = new Coin[5];
 
-    public final Card[] prizeclawCards = new Card[3];
-    public final Card[] lvl1Cards = new Card[15];
-    public final Card[] lvl2Cards = new Card[15];
-    public final Card[] lvl3Cards = new Card[15];
+    public final ArrayList<Card> prizeclawCards = new ArrayList<Card>();
+    public final ArrayList<Card> lvl1Cards = new ArrayList<Card>();
+    public final ArrayList<Card> lvl2Cards = new ArrayList<Card>();
+    public final ArrayList<Card> lvl3Cards = new ArrayList<Card>();
 
     public final JPanel prizeclawPanel = new JPanel();
     public final JPanel lvl1Panel = new JPanel();
@@ -232,48 +233,41 @@ public class Board extends JFrame {
         cardMidPanel.add(lvl2Panel);
         cardMidPanel.add(lvl3Panel);
 
-        // ---------------------------- TEST CARD
-        // ----------------------------------------------------------------------------
-        Card someCard = new Card(1, 1, "white", new Price(1, 0, 1, 0, 0), banker);
-        lvl1Panel.add(someCard);
-
-        // -------------------------------------------------------------------------------------------------------------------
-
         midPanel.add(cardMidPanel, BorderLayout.CENTER);
 
-        prizeclawCards[0] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
-        prizeclawCards[1] = new Card(0, 3, new Price(4, 0, 4, 0, 0), banker);
-        prizeclawCards[2] = new Card(0, 4, new Price(5, 5, 0, 0, 0), banker);
+        prizeclawCards.add(new Card(0, 3, new Price(4, 0, 4, 0, 0), banker));
+        prizeclawCards.add(new Card(0, 3, new Price(4, 0, 4, 0, 0), banker));
+        prizeclawCards.add(new Card(0, 4, new Price(5, 5, 0, 0, 0), banker));
 
         // -------------------------------------------------------------------------------------------------------------------
         for (int i = 0; i < 5; i++) {
-            lvl1Cards[i] = new Card(1, 1, "white", new Price(0, 0, 2, 3, 0), banker);
+            lvl1Cards.add(new Card(1, 1, "white", new Price(0, 0, 2, 3, 0), banker));
         }
         for (int i = 5; i < 10; i++) {
-            lvl1Cards[i] = new Card(1, 1, "blue", new Price(3, 0, 1, 0, 0), banker);
+            lvl1Cards.add(new Card(1, 1, "blue", new Price(3, 0, 1, 0, 0), banker));
         }
         for (int i = 10; i < 15; i++) {
-            lvl1Cards[i] = new Card(1, 1, "green", new Price(0, 2, 2, 0, 0), banker);
+            lvl1Cards.add(new Card(1, 1, "green", new Price(0, 2, 2, 0, 0), banker));
         }
         // -------------------------------------------------------------------------------------------------------------------
         for (int i = 0; i < 5; i++) {
-            lvl2Cards[i] = new Card(2, 2, "white", new Price(2, 0, 0, 3, 1), banker);
+            lvl2Cards.add(new Card(2, 2, "white", new Price(2, 0, 0, 3, 1), banker));
         }
         for (int i = 5; i < 10; i++) {
-            lvl2Cards[i] = new Card(2, 3, "green", new Price(3, 4, 0, 0, 0), banker);
+            lvl2Cards.add(new Card(2, 3, "green", new Price(3, 4, 0, 0, 0), banker));
         }
         for (int i = 10; i < 15; i++) {
-            lvl2Cards[i] = new Card(2, 4, "blue", new Price(3, 2, 0, 0, 0), banker);
+            lvl2Cards.add(new Card(2, 4, "blue", new Price(3, 2, 0, 0, 0), banker));
         }
         // -------------------------------------------------------------------------------------------------------------------
         for (int i = 0; i < 5; i++) {
-            lvl3Cards[i] = new Card(3, 4, "green", new Price(5, 2, 0, 0, 0), banker);
+            lvl3Cards.add(new Card(3, 4, "green", new Price(5, 2, 0, 0, 0), banker));
         }
         for (int i = 5; i < 10; i++) {
-            lvl3Cards[i] = new Card(3, 4, "blue", new Price(6, 6, 0, 0, 0), banker);
+            lvl3Cards.add(new Card(3, 4, "blue", new Price(6, 6, 0, 0, 0), banker));
         }
         for (int i = 10; i < 15; i++) {
-            lvl3Cards[i] = new Card(3, 4, "red", new Price(5, 3, 0, 1, 0), banker);
+            lvl3Cards.add(new Card(3, 4, "red", new Price(5, 3, 0, 1, 0), banker));
         }
         // -------------------------------------------------------------------------------------------------------------------
         // The score board:
