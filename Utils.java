@@ -2,12 +2,12 @@ import java.awt.Image;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Utils {
     public static final AListener listener = new AListener();
     public static final MListener mouseListener = new MListener();
     public static final Board board = new Board();
-    private static Card pressedCard;
     public static final Random randomizer = new Random();
 
     public static int getRandomCardIndex(int level) {
@@ -76,19 +76,6 @@ public class Utils {
         }
     }
 
-    // public static void setPressedCard(Card card) {
-    //     Utils.pressedCard = card;
-    // }
-
-    // public static Card getPressedCard() {
-    //     if (pressedCard != null) {
-    //         System.out.println("getPressed reports " + pressedCard.superCoin.color + " card as pressed");
-    //     } else {
-    //         System.out.println("getPressed reports null card as pressed");
-    //     }
-    //     return pressedCard;
-    // }
-
     public static void switchRound() {
         System.out.println("switching round");
         if (board.player1.isOn) {
@@ -106,7 +93,8 @@ public class Utils {
         Slot_Machine.reset();
     }
 
-    public static void popUp(String message) {
+    public static void popUp(String title, String message) {
+        JOptionPane.showMessageDialog(board, message, title, JOptionPane.DEFAULT_OPTION);
         // Should popup a message
         System.out.println("\npop up: " + message + "\n");
     }

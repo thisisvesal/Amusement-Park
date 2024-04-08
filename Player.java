@@ -224,7 +224,7 @@ public class Player {
                 superWhiteCoinCount++;
             }
         } else {
-            Utils.popUp("You can't buy this card!");
+            Utils.popUp("Whoops!", "You can't buy this card!");
         }
     }
 
@@ -262,9 +262,9 @@ public class Player {
                     Utils.board.blackMachine.setEnabled(false);
                 }
             } else if (getCoinCount("all") >= 10) {
-                Utils.popUp("You can't have more than 10 coins at once!");
+                Utils.popUp("Whoops!", "You can't have more than 10 coins at once!");
             } else if (doubleCoinRequestedFrom(slotMachine)) {
-                Utils.popUp("You just took a coin from here, choose another machine");
+                Utils.popUp("Whoops!", "You just took a coin from here, choose another machine");
             }
         }
 
@@ -272,7 +272,7 @@ public class Player {
 
     public void reserve(Card card) {
         if (hasReservedCardThisRound || reservedCardCount >= 3) {
-            Utils.popUp("You can't reserve any more cards!");
+            Utils.popUp("Whoops!", "You can't reserve any more cards!");
         } else {
             card.reserve();
             reservedCards[reservedCardCount] = card;

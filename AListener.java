@@ -69,7 +69,7 @@ public class AListener implements ActionListener {
         }
 
         if (Utils.getPlayerOfTheRound().getScore() == 15) {
-            Utils.popUp(Utils.getPlayerOfTheRound() + " winssssss");
+            Utils.popUp(Utils.getPlayerOfTheRound() + " winssssss", "");
         }
 
         if (Utils.getPlayerOfTheRound().isRoundFinished()) {

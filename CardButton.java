@@ -21,7 +21,7 @@ public class CardButton extends JButton {
         this.setBackground(new Color(232, 249, 250));
         this.setFocusable(false);
         this.setLayout(new BorderLayout(0, 0));
-        ImageIcon superCoinIcon = new ImageIcon("icons/coins/" + this.card.superCoin.color + ".png");
+        ImageIcon superCoinIcon = new ImageIcon("icons/supercoins/" + this.card.superCoin.color + ".png");
         ImageIcon toyIcon;
         ImageIcon[] priceIcon = new ImageIcon[3];
         JLabel superCoinLabel = new JLabel();
@@ -137,74 +137,148 @@ public class CardButton extends JButton {
         }
 
         int priceCount = 0;
-        if (card.price.red > 0) {
-            priceIcon[priceCount] = new ImageIcon("icons/coins/red.png");
-            Image image = priceIcon[priceCount].getImage();
-            Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            priceIcon[priceCount] = new ImageIcon(resizedImage);
-            priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
-            priceLabel[priceCount].setText("" + card.price.red);
-            priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
-            priceLabel[priceCount].setForeground(Color.white);
-            pricePanel.add(priceLabel[priceCount]);
-            priceCount++;
-        }
-        if (card.price.blue > 0) {
-            priceIcon[priceCount] = new ImageIcon("icons/coins/blue.png");
-            Image image = priceIcon[priceCount].getImage();
-            Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            priceIcon[priceCount] = new ImageIcon(resizedImage);
-            priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
-            priceLabel[priceCount].setText("" + card.price.blue);
-            priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
-            priceLabel[priceCount].setForeground(Color.white);
-            pricePanel.add(priceLabel[priceCount]);
-            priceCount++;
-        }
-        if (card.price.green > 0) {
-            priceIcon[priceCount] = new ImageIcon("icons/coins/green.png");
-            Image image = priceIcon[priceCount].getImage();
-            Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            priceIcon[priceCount] = new ImageIcon(resizedImage);
-            priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
-            priceLabel[priceCount].setText("" + card.price.green);
-            priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
-            priceLabel[priceCount].setForeground(Color.white);
-            pricePanel.add(priceLabel[priceCount]);
-            priceCount++;
-        }
-        if (card.price.white > 0) {
-            priceIcon[priceCount] = new ImageIcon("icons/coins/white.png");
-            Image image = priceIcon[priceCount].getImage();
-            Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            priceIcon[priceCount] = new ImageIcon(resizedImage);
-            priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
-            priceLabel[priceCount].setText("" + card.price.white);
-            priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
-            pricePanel.add(priceLabel[priceCount]);
-            priceCount++;
-        }
-        if (card.price.black > 0) {
-            priceIcon[priceCount] = new ImageIcon("icons/coins/black.png");
-            Image image = priceIcon[priceCount].getImage();
-            Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-            priceIcon[priceCount] = new ImageIcon(resizedImage);
-            priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
-            priceLabel[priceCount].setText("" + card.price.black);
-            priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
-            priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
-            priceLabel[priceCount].setForeground(Color.white);
-            pricePanel.add(priceLabel[priceCount]);
-            priceCount++;
+        if (card.level != 0) {
+            if (card.price.red > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/coins/red.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.red);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.blue > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/coins/blue.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.blue);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.green > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/coins/green.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.green);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.white > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/coins/white.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.white);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.black > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/coins/black.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.black);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+
+        } else {
+            if (card.price.red > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/supercoins/red.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.red);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.blue > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/supercoins/blue.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.blue);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.green > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/supercoins/green.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.green);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.white > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/supercoins/white.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.white);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+            if (card.price.black > 0) {
+                priceIcon[priceCount] = new ImageIcon("icons/supercoins/black.png");
+                Image image = priceIcon[priceCount].getImage();
+                Image resizedImage = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+                priceIcon[priceCount] = new ImageIcon(resizedImage);
+                priceLabel[priceCount] = new JLabel(priceIcon[priceCount]);
+                priceLabel[priceCount].setText("" + card.price.black);
+                priceLabel[priceCount].setHorizontalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setVerticalTextPosition(JLabel.CENTER);
+                priceLabel[priceCount].setFont(new Font("Tahoma", Font.BOLD, 12));
+                priceLabel[priceCount].setForeground(Color.white);
+                pricePanel.add(priceLabel[priceCount]);
+                priceCount++;
+            }
+
         }
 
         this.add(superCoinPanel, BorderLayout.NORTH);
