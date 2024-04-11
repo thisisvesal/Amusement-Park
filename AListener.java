@@ -66,6 +66,8 @@ public class AListener implements ActionListener {
         } else if (e.getSource() == Utils.board.passButton) {
             System.out.println("\nPass button\n");
             Utils.switchRound();
+        } else if (e.getSource() instanceof Coin) {
+            System.out.println(((Coin)e.getSource()).color + " coin");
         }
 
         if (Utils.getPlayerOfTheRound().getScore() == 15) {

@@ -1,10 +1,14 @@
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Coin extends JLabel {
-    final String color;
-    final boolean isSpecial;
+public class Coin extends JButton {
+    public final String color;
+    public final boolean isSpecial;
     private Player owner;
+    // public final JLabel label = new JLabel();
+    
 
     public Coin(String color, boolean isSpecial, Player owner) {
         this.color = color;
@@ -19,6 +23,12 @@ public class Coin extends JLabel {
         }
         this.setVerticalTextPosition(JLabel.BOTTOM);
         this.setHorizontalTextPosition(JLabel.CENTER);
+
+        this.setBorder(BorderFactory.createEmptyBorder());
+        this.setContentAreaFilled(false);
+        if (!isSpecial && color != "gold") {
+            this.addActionListener(Utils.listener);
+        }
     }
 
     public Coin(String color, boolean isSpecial) {
