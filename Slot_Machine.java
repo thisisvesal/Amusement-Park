@@ -32,6 +32,11 @@ public class Slot_Machine extends JButton {
         }
     }
 
+    public void addOneCoin() {
+        coinCount++;
+        this.setEnabled(true);
+    }
+
     public boolean canDoType1() {
         if (coinCount == 4) {
             return true;

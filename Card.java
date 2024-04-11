@@ -9,6 +9,7 @@ public class Card extends JPanel {
     public final int level;
     public final Coin superCoin;
     public final int score;
+    public final boolean isPrizeclaw;
     private Player owner;
     private boolean reserved;
     public final Price price;
@@ -47,6 +48,12 @@ public class Card extends JPanel {
 
         this.add(button);
         this.add(buttonPanel);
+
+        if (this.superCoin.color == null) {
+            isPrizeclaw = true;
+        } else {
+            isPrizeclaw = false;
+        }
     }
 
     // Constructing prize-claws:

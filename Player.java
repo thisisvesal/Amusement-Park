@@ -112,22 +112,40 @@ public class Player {
         return score;
     }
 
-    public boolean canPay(Price price) {
+    public boolean canPay(Price price, boolean isPrizeclaw) {
         boolean inProperty = true;
-        if (price.red > 0 && goldCoinCount + redCoinCount + superRedCoinCount < price.red) {
-            inProperty = false;
-        }
-        if (price.blue > 0 && goldCoinCount + blueCoinCount + superBlueCoinCount < price.blue) {
-            inProperty = false;
-        }
-        if (price.green > 0 && goldCoinCount + greenCoinCount + superGreenCoinCount < price.green) {
-            inProperty = false;
-        }
-        if (price.black > 0 && goldCoinCount + blackCoinCount + superBlackCoinCount < price.black) {
-            inProperty = false;
-        }
-        if (price.white > 0 && goldCoinCount + whiteCoinCount + superWhiteCoinCount < price.white) {
-            inProperty = false;
+        if (!isPrizeclaw) {
+            if (price.red > 0 && goldCoinCount + redCoinCount + superRedCoinCount < price.red) {
+                inProperty = false;
+            }
+            if (price.blue > 0 && goldCoinCount + blueCoinCount + superBlueCoinCount < price.blue) {
+                inProperty = false;
+            }
+            if (price.green > 0 && goldCoinCount + greenCoinCount + superGreenCoinCount < price.green) {
+                inProperty = false;
+            }
+            if (price.black > 0 && goldCoinCount + blackCoinCount + superBlackCoinCount < price.black) {
+                inProperty = false;
+            }
+            if (price.white > 0 && goldCoinCount + whiteCoinCount + superWhiteCoinCount < price.white) {
+                inProperty = false;
+            }
+        } else {
+            if (price.red > 0 && superRedCoinCount < price.red) {
+                inProperty = false;
+            }
+            if (price.blue > 0 && superBlueCoinCount < price.blue) {
+                inProperty = false;
+            }
+            if (price.green > 0 && superGreenCoinCount < price.green) {
+                inProperty = false;
+            }
+            if (price.black > 0 && superBlackCoinCount < price.black) {
+                inProperty = false;
+            }
+            if (price.white > 0 && superWhiteCoinCount < price.white) {
+                inProperty = false;
+            }
         }
         return inProperty;
     }
@@ -186,7 +204,7 @@ public class Player {
     }
 
     public void buyCard(Card card) {
-        if (canPay(card.price) && (!card.isReserved() || this.hasReserved(card))) {
+        if (canPay(card.price, card.isPrizeclaw) && (!card.isReserved() || this.hasReserved(card))) {
             pay(card.price);
             cardCount++;
             doneMovesCount++;
@@ -353,4 +371,22 @@ public class Player {
         return false;
     }
 
+    public void returnCoin(String color) {
+        if (color == "red") {
+            this.redCoinCount --;
+            Utils.board.redMachine.addOneCoin();
+        } else if (color == "blue") {
+            this.blueCoinCount --;
+            Utils.board.blueMachine.addOneCoin();
+        } else if (color == "green") {
+            this.greenCoinCount --;
+            Utils.board.greenMachine.addOneCoin();
+        } else if (color == "black") {
+            this.blackCoinCount --;
+            Utils.board.blackMachine.addOneCoin();
+        } else if (color == "white") {
+            this.whiteCoinCount --;
+            Utils.board.whiteMachine.addOneCoin();
+        }
+    }
 }
