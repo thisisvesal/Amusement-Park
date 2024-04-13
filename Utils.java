@@ -26,10 +26,8 @@ public class Utils {
     public static void arrangeCards() {
         int randIndex;
         for (int i = 0; i < 3; i++) {
-            randIndex = getRandomCardIndex(0);
-            board.prizeclawPanel.add(board.prizeclawCards.get(randIndex));
-            System.out.println("prizeclaw " + ((Card)board.prizeclawCards.get(randIndex)).getOwner());
-            board.prizeclawCards.remove(randIndex);
+            board.prizeclawPanel.add(board.prizeclawCards.get(i));
+            System.out.println("prizeclaw " + ((Card)board.prizeclawCards.get(i)).getOwner());
 
             randIndex = getRandomCardIndex(1);
             board.lvl1Panel.add(board.lvl1Cards.get(randIndex));

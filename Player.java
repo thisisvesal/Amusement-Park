@@ -28,17 +28,21 @@ public class Player {
     private int score;
     public final Cursor cursor;
     private int doneMovesCount;
+    public final String color;
 
     public Player(String name) {
         this.name = name;
         if (name == "Player1") {
             Image icon = new ImageIcon("icons/cursors/purpleSmall.png").getImage();
             cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon, new Point(0, 0), "cursor1");
+            color = "purple";
         } else if (name == "Player2") {
             Image icon = new ImageIcon("icons/cursors/greenSmall.png").getImage();
             cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon, new Point(0, 0), "cursor1");
+            color = "green";
         } else {
             cursor = Cursor.getDefaultCursor();
+            color = null;
         }
 
     }
@@ -110,6 +114,25 @@ public class Player {
 
     public int getScore() {
         return score;
+    }
+
+    private void getPrize() {
+        System.out.println("Prizeclaw length: " + Utils.board.prizeclawCards.size());
+        for (int i = 0; i < Utils.board.prizeclawCards.size(); i++) {
+            System.out.println("Iterating " + i);
+            Card card = Utils.board.prizeclawCards.get(i);
+            if (this.canPay(card.price, true)) {
+                System.out.println("The player can pay for " + card);
+                pay(card.price);
+                cardCount++;
+                this.score += card.score;
+                card.setOwner(this);
+                Utils.popUp("PRIZE", "Congrats! You got a prize claw card");
+                Utils.board.prizeclawPanel.remove(card);
+                Utils.board.prizeclawCards.remove(card);
+                Utils.replace(card);
+            }
+        }
     }
 
     public boolean canPay(Price price, boolean isPrizeclaw) {
@@ -218,9 +241,7 @@ public class Player {
                     Utils.board.reservedCardPanel2.remove(card);
                 }
             } else {
-                if (card.level == 0) {
-                    Utils.board.prizeclawPanel.remove(card);
-                } else if (card.level == 1) {
+                if (card.level == 1) {
                     Utils.board.lvl1Panel.remove(card);
                 } else if (card.level == 2) {
                     Utils.board.lvl2Panel.remove(card);
@@ -241,6 +262,9 @@ public class Player {
             } else if (card.superCoin.color == "white") {
                 superWhiteCoinCount++;
             }
+
+            this.getPrize();
+
         } else {
             Utils.popUp("Whoops!", "You can't buy this card!");
         }
@@ -373,19 +397,19 @@ public class Player {
 
     public void returnCoin(String color) {
         if (color == "red") {
-            this.redCoinCount --;
+            this.redCoinCount--;
             Utils.board.redMachine.addOneCoin();
         } else if (color == "blue") {
-            this.blueCoinCount --;
+            this.blueCoinCount--;
             Utils.board.blueMachine.addOneCoin();
         } else if (color == "green") {
-            this.greenCoinCount --;
+            this.greenCoinCount--;
             Utils.board.greenMachine.addOneCoin();
         } else if (color == "black") {
-            this.blackCoinCount --;
+            this.blackCoinCount--;
             Utils.board.blackMachine.addOneCoin();
         } else if (color == "white") {
-            this.whiteCoinCount --;
+            this.whiteCoinCount--;
             Utils.board.whiteMachine.addOneCoin();
         }
     }

@@ -47,8 +47,12 @@ public class Card extends JPanel {
         buttonPanel.add(reserveButton);
 
         this.add(button);
-        this.add(buttonPanel);
-
+        if (this.level != 0) {
+            this.add(buttonPanel);
+        } else {
+            this.button.setEnabled(false);
+        }
+        
         if (this.superCoin.color == null) {
             isPrizeclaw = true;
         } else {
