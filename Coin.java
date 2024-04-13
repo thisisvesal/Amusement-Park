@@ -7,7 +7,6 @@ public class Coin extends JButton {
     public final String color;
     public final boolean isSpecial;
     private Player owner;
-    // public final JLabel label = new JLabel();
     
 
     public Coin(String color, boolean isSpecial, Player owner) {
