@@ -85,8 +85,10 @@ public class Board extends JFrame {
 
     // Menu components:
     public final JButton startButton = new JButton("START");
-    public final JButton settingsButton = new JButton("SETTINGS");
-    public final JButton howToPlayButton = new JButton("HOW TO PLAY");
+
+    // For future updates:
+    // public final JButton settingsButton = new JButton("SETTINGS");
+    // public final JButton howToPlayButton = new JButton("HOW TO PLAY");
 
     public Board() {
         icon = new ImageIcon("icons/icon.png");
@@ -364,18 +366,20 @@ public class Board extends JFrame {
         startButton.setBounds(370, 300, 450, 100);
         startButton.setBackground(new Color(219, 245, 255));
         this.add(startButton);
-        settingsButton.addActionListener(Utils.listener);
-        settingsButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        settingsButton.setFocusable(false);
-        settingsButton.setBounds(370, 425, 450, 100);
-        settingsButton.setBackground(new Color(184, 245, 210));
-        this.add(settingsButton);
-        howToPlayButton.addActionListener(Utils.listener);
-        howToPlayButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        howToPlayButton.setFocusable(false);
-        howToPlayButton.setBounds(370, 550, 450, 100);
-        howToPlayButton.setBackground(new Color(232, 213, 247));
-        this.add(howToPlayButton);
+
+        // For future updates:
+        // settingsButton.addActionListener(Utils.listener);
+        // settingsButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        // settingsButton.setFocusable(false);
+        // settingsButton.setBounds(370, 425, 450, 100);
+        // settingsButton.setBackground(new Color(184, 245, 210));
+        // this.add(settingsButton);
+        // howToPlayButton.addActionListener(Utils.listener);
+        // howToPlayButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        // howToPlayButton.setFocusable(false);
+        // howToPlayButton.setBounds(370, 550, 450, 100);
+        // howToPlayButton.setBackground(new Color(232, 213, 247));
+        // this.add(howToPlayButton);
     }
 
 }

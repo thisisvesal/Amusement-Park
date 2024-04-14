@@ -84,10 +84,6 @@ public class AListener implements ActionListener {
         } else if (e.getSource() == Utils.board.startButton) {
             MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
             Utils.board.initializeGameBoard();
-        } else if (e.getSource() == Utils.board.settingsButton) {
-            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
-        } else if (e.getSource() == Utils.board.howToPlayButton) {
-            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
         }
 
         if (Utils.getPlayerOfTheRound().getScore() >= 15) {
