@@ -78,6 +78,8 @@ public class AListener implements ActionListener {
                 }
             }
 
+        } else if (e.getSource() == Utils.board.startButton) {
+            Utils.board.initializeGameBoard();
         }
         
 

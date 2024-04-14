@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Board extends JFrame {
+    // Game board components:
     public final ImageIcon icon;
     public final JPanel midPanel = new JPanel();
     public final JPanel player1Panel = new JPanel();
@@ -80,9 +81,55 @@ public class Board extends JFrame {
     JPanel reservedCardPanel2 = new JPanel();
     JPanel cardMidPanel = new JPanel();
 
+    // Menu components:
+    JButton startButton = new JButton("START");
+    JButton settingsButton = new JButton("SETTINGS");
+    JButton howToPlayButton = new JButton("HOW TO PLAY");
+
     public Board() {
-        this.addMouseMotionListener(Utils.mouseListener);
         icon = new ImageIcon("icons/icon.png");
+
+        greenCoin1 = new Coin("green", player1);
+        redCoin1 = new Coin("red", player1);
+        whiteCoin1 = new Coin("white", player1);
+        blackCoin1 = new Coin("black", player1);
+        blueCoin1 = new Coin("blue", player1);
+        goldCoin1 = new Coin("gold", player1);
+
+        superGreenCoin1 = new Coin("green", true, player1);
+        superRedCoin1 = new Coin("red", true, player1);
+        superWhiteCoin1 = new Coin("white", true, player1);
+        superBlackCoin1 = new Coin("black", true, player1);
+        superBlueCoin1 = new Coin("blue", true, player1);
+
+        greenCoin2 = new Coin("green", player2);
+        redCoin2 = new Coin("red", player2);
+        whiteCoin2 = new Coin("white", player2);
+        blackCoin2 = new Coin("black", player2);
+        blueCoin2 = new Coin("blue", player2);
+        goldCoin2 = new Coin("gold", player2);
+
+        superGreenCoin2 = new Coin("green", true, player2);
+        superRedCoin2 = new Coin("red", true, player2);
+        superWhiteCoin2 = new Coin("white", true, player2);
+        superBlackCoin2 = new Coin("black", true, player2);
+        superBlueCoin2 = new Coin("blue", true, player2);
+
+        this.setTitle("Amusement Park");
+        this.setIconImage(icon.getImage());
+        this.getContentPane().setBackground(Color.white);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1220, 800);
+        this.setResizable(true);
+        this.setLocationRelativeTo(null);
+        this.setLayout(new FlowLayout());
+        this.setVisible(true);
+    }
+
+    public void initializeGameBoard() {
+        getContentPane().removeAll();
+        this.setLayout(new FlowLayout());
+        this.addMouseMotionListener(Utils.mouseListener);
 
         JPanel playersPanel = new JPanel(new BorderLayout(10, 0));
         playersPanel.setOpaque(false);
@@ -94,8 +141,8 @@ public class Board extends JFrame {
         player1Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
         player2Panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 
-        player1Panel.setBackground(Color.white);
-        player2Panel.setBackground(Color.white);
+        player1Panel.setBackground(new Color(218, 184, 245));
+        player2Panel.setBackground(new Color(184, 245, 210));
         midPanel.setBackground(new Color(119, 232, 247));
 
         midPanel.setPreferredSize(new Dimension(1200, 500));
@@ -135,20 +182,7 @@ public class Board extends JFrame {
         player1Panel.add(reservedCardPanel1);
         player2Panel.add(reservedCardPanel2);
         player1Panel.add(coinPanel1);
-        player2Panel.add(coinPanel2);
-
-        greenCoin1 = new Coin("green", player1);
-        redCoin1 = new Coin("red", player1);
-        whiteCoin1 = new Coin("white", player1);
-        blackCoin1 = new Coin("black", player1);
-        blueCoin1 = new Coin("blue", player1);
-        goldCoin1 = new Coin("gold", player1);
-
-        superGreenCoin1 = new Coin("green", true, player1);
-        superRedCoin1 = new Coin("red", true, player1);
-        superWhiteCoin1 = new Coin("white", true, player1);
-        superBlackCoin1 = new Coin("black", true, player1);
-        superBlueCoin1 = new Coin("blue", true, player1);
+        player2Panel.add(coinPanel2); 
 
         allCoins1[0] = greenCoin1;
         allCoins1[1] = redCoin1;
@@ -162,19 +196,6 @@ public class Board extends JFrame {
         allSuperCoins1[2] = superWhiteCoin1;
         allSuperCoins1[3] = superBlackCoin1;
         allSuperCoins1[4] = superBlueCoin1;
-
-        greenCoin2 = new Coin("green", player2);
-        redCoin2 = new Coin("red", player2);
-        whiteCoin2 = new Coin("white", player2);
-        blackCoin2 = new Coin("black", player2);
-        blueCoin2 = new Coin("blue", player2);
-        goldCoin2 = new Coin("gold", player2);
-
-        superGreenCoin2 = new Coin("green", true, player2);
-        superRedCoin2 = new Coin("red", true, player2);
-        superWhiteCoin2 = new Coin("white", true, player2);
-        superBlackCoin2 = new Coin("black", true, player2);
-        superBlueCoin2 = new Coin("blue", true, player2);
 
         allCoins2[0] = greenCoin2;
         allCoins2[1] = redCoin2;
@@ -222,7 +243,7 @@ public class Board extends JFrame {
         lvl2Panel.setOpaque(false);
         lvl3Panel.setOpaque(false);
 
-        // For testing purposes, although they're in visible:
+        // For testing purposes, although they're invisible:
         prizeclawPanel.setBackground(Color.red);
         lvl1Panel.setBackground(Color.blue);
         lvl2Panel.setBackground(Color.magenta);
@@ -308,18 +329,44 @@ public class Board extends JFrame {
         passButton.addActionListener(Utils.listener);
         scoreTray.add(passButton);
 
-        
-
-        this.setTitle("Amusement Park");
-        this.setIconImage(icon.getImage());
-        this.getContentPane().setBackground(Color.white);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1220, 800);
-        this.setResizable(true);
-        this.setLocationRelativeTo(null);
-        this.setLayout(new FlowLayout());
-        this.setVisible(true);
         this.add(midPanel);
         this.add(playersPanel);
+
+        Utils.arrangeCards();
+        Utils.refreshBoard();
     }
+    
+    public void initializeMenu() {
+        getContentPane().removeAll();
+        this.setLayout(null);
+        this.getContentPane().setBackground(new Color(119, 232, 247));
+
+        JLabel title = new JLabel("AMUSEMENT PARK");
+        title.setFont(new Font("Bauhaus 93", Font.BOLD, 107));
+        title.setForeground(new Color(182, 90, 196));
+        title.setBackground(new Color(184, 245, 210));
+        // title.setOpaque(true);
+        title.setBounds(160, 50, 900, 200);
+        this.add(title);
+
+        startButton.addActionListener(Utils.listener);
+        startButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        startButton.setFocusable(false);
+        startButton.setBounds(370, 300, 450, 100);
+        startButton.setBackground(new Color(219, 245, 255));
+        this.add(startButton);
+        settingsButton.addActionListener(Utils.listener);
+        settingsButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        settingsButton.setFocusable(false);
+        settingsButton.setBounds(370, 425, 450, 100);
+        settingsButton.setBackground(new Color(184, 245, 210));
+        this.add(settingsButton);
+        howToPlayButton.addActionListener(Utils.listener);
+        howToPlayButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        howToPlayButton.setFocusable(false);
+        howToPlayButton.setBounds(370, 550, 450, 100);
+        howToPlayButton.setBackground(new Color(232, 213, 247));
+        this.add(howToPlayButton);
+    }
+
 }
