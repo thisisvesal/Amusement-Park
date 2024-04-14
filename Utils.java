@@ -51,6 +51,9 @@ public class Utils {
         System.out.println("lvl1 length after arrange: " + board.lvl1Cards.size());
         System.out.println("lvl2 length after arrange: " + board.lvl2Cards.size());
         System.out.println("lvl3 length after arrange: " + board.lvl3Cards.size());
+
+        board.revalidate();
+        board.repaint();
     }
 
     public static void replace(Card card) {
