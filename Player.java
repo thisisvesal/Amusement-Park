@@ -137,41 +137,60 @@ public class Player {
     }
 
     public boolean canPay(Price price, boolean isPrizeclaw) {
-        boolean inProperty = true;
         if (!isPrizeclaw) {
+            int goldCopy = goldCoinCount;
             if (price.red > 0 && goldCoinCount + redCoinCount + superRedCoinCount < price.red) {
-                inProperty = false;
+                return false;
+            } else if (price.red > 0 && redCoinCount + superRedCoinCount < price.red) {
+                goldCopy -= price.red - redCoinCount - superRedCoinCount;
             }
+
             if (price.blue > 0 && goldCoinCount + blueCoinCount + superBlueCoinCount < price.blue) {
-                inProperty = false;
+                return false;
+            } else if (price.blue > 0 && blueCoinCount + superBlueCoinCount < price.blue) {
+                goldCopy -= price.blue - blueCoinCount - superBlueCoinCount;
             }
+
             if (price.green > 0 && goldCoinCount + greenCoinCount + superGreenCoinCount < price.green) {
-                inProperty = false;
+                return false;
+            } else if (price.green > 0 && greenCoinCount + superGreenCoinCount < price.green) {
+                goldCopy -= price.green - greenCoinCount - superGreenCoinCount;
             }
+
             if (price.black > 0 && goldCoinCount + blackCoinCount + superBlackCoinCount < price.black) {
-                inProperty = false;
+                return false;
+            } else if (price.black > 0 && blackCoinCount + superBlackCoinCount < price.black) {
+                goldCopy -= price.black - blackCoinCount - superBlackCoinCount;
             }
+
             if (price.white > 0 && goldCoinCount + whiteCoinCount + superWhiteCoinCount < price.white) {
-                inProperty = false;
+                return false;
+            } else if (price.white > 0 && whiteCoinCount + superWhiteCoinCount < price.white) {
+                goldCopy -= price.white - whiteCoinCount - superWhiteCoinCount;
             }
+
+            if (goldCopy < 0) {
+                return false;
+            }
+
         } else {
             if (price.red > 0 && superRedCoinCount < price.red) {
-                inProperty = false;
+                return false;
             }
             if (price.blue > 0 && superBlueCoinCount < price.blue) {
-                inProperty = false;
+                return false;
             }
             if (price.green > 0 && superGreenCoinCount < price.green) {
-                inProperty = false;
+                return false;
             }
             if (price.black > 0 && superBlackCoinCount < price.black) {
-                inProperty = false;
+                return false;
             }
             if (price.white > 0 && superWhiteCoinCount < price.white) {
-                inProperty = false;
+                return false;
             }
         }
-        return inProperty;
+        return true;
     }
 
     public void pay(Price price) {
