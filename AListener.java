@@ -66,6 +66,7 @@ public class AListener implements ActionListener {
             MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
             System.out.println("\nPass button\n");
             Utils.switchRound();
+            Utils.board.setCursor(Utils.getPlayerOfTheRound().cursor);
         } else if (e.getSource() instanceof Coin) {
             System.out.println(((Coin) e.getSource()).color + " coin");
             if (((Coin) e.getSource()).getOwner() == Utils.getPlayerOfTheRound()) {
@@ -94,6 +95,7 @@ public class AListener implements ActionListener {
         if (Utils.getPlayerOfTheRound().isRoundFinished()) {
             MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
             Utils.switchRound();
+            Utils.board.setCursor(Utils.getPlayerOfTheRound().cursor);
         }
 
         Utils.refreshBoard();

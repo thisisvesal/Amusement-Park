@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class Utils {
     public static final AListener listener = new AListener();
-    public static final MListener mouseListener = new MListener();
+    public static final MListener mouseMotionListener = new MListener();
     public static final Board board = new Board();
     public static final Random randomizer = new Random();
 

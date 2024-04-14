@@ -133,7 +133,7 @@ public class Board extends JFrame {
     public void initializeGameBoard() {
         getContentPane().removeAll();
         this.setLayout(new FlowLayout());
-        this.addMouseMotionListener(Utils.mouseListener);
+        this.addMouseMotionListener(Utils.mouseMotionListener);
 
         JPanel playersPanel = new JPanel(new BorderLayout(10, 0));
         playersPanel.setOpaque(false);
