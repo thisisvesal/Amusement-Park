@@ -127,6 +127,7 @@ public class Player {
                 cardCount++;
                 this.score += card.score;
                 card.setOwner(this);
+                MusicPlayer.play("music/mixkit-arcade-game-complete-or-approved-mission-205.wav");
                 Utils.popUp("PRIZE", "Congrats! You got a prize claw card");
                 Utils.board.prizeclawPanel.remove(card);
                 Utils.board.prizeclawCards.remove(card);
@@ -234,6 +235,8 @@ public class Player {
             this.score += card.score;
             card.setOwner(this);
 
+            MusicPlayer.play("music/mixkit-gold-coin-prize-1999.wav");
+
             if (card.isReserved()) {
                 if (Utils.getPlayerOfTheRound() == Utils.board.player1) {
                     Utils.board.reservedCardPanel1.remove(card);
@@ -266,6 +269,7 @@ public class Player {
             this.getPrize();
 
         } else {
+            MusicPlayer.play("music/mixkit-single-key-type-2533.wav");
             Utils.popUp("Whoops!", "You can't buy this card!");
         }
     }
@@ -283,6 +287,7 @@ public class Player {
             if (getCoinCount("all") < 10 && !doubleCoinRequestedFrom(slotMachine)) {
                 slotMachine.press();
                 slotMachine.removeOneCoin();
+                MusicPlayer.play("music/mixkit-coins-sound-2003.wav");
                 if (slotMachine.color == "red") {
                     redCoinCount++;
                 } else if (slotMachine.color == "blue") {
@@ -304,8 +309,10 @@ public class Player {
                     Utils.board.blackMachine.setEnabled(false);
                 }
             } else if (getCoinCount("all") >= 10) {
-                Utils.popUp("Whoops!", "You can't have more than 10 coins at once!");
+                MusicPlayer.play("music/mixkit-arcade-game-jump-coin-216.wav");
+                Utils.popUp("Whoops!", "You can't have more than 10 coins at once!\nReturn some coins if you want");
             } else if (doubleCoinRequestedFrom(slotMachine)) {
+                MusicPlayer.play("music/mixkit-arcade-game-jump-coin-216.wav");
                 Utils.popUp("Whoops!", "You just took a coin from here, choose another machine");
             }
         }
@@ -314,8 +321,10 @@ public class Player {
 
     public void reserve(Card card) {
         if (hasReservedCardThisRound || reservedCardCount >= 3) {
+            MusicPlayer.play("music/mixkit-single-key-type-2533.wav");
             Utils.popUp("Whoops!", "You can't reserve any more cards!");
         } else {
+            MusicPlayer.play("music/mixkit-paper-slide-1530.wav");
             card.reserve();
             reservedCards[reservedCardCount] = card;
             reservedCardCount++;

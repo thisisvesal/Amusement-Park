@@ -30,6 +30,7 @@ public class AListener implements ActionListener {
                 System.out.println(Utils.board.player2.getCoinCount(slotMachine.color));
             }
         } else if (e.getSource() instanceof CardButton) {
+            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
             System.out.println("card");
             if (((Card) ((CardButton) e.getSource()).card).buyButton.isVisible()
                     || ((Card) ((CardButton) e.getSource()).card).reserveButton.isVisible()) {
@@ -62,11 +63,13 @@ public class AListener implements ActionListener {
             Utils.board.revalidate();
             Utils.board.repaint();
         } else if (e.getSource() == Utils.board.passButton) {
+            MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
             System.out.println("\nPass button\n");
             Utils.switchRound();
         } else if (e.getSource() instanceof Coin) {
             System.out.println(((Coin) e.getSource()).color + " coin");
             if (((Coin) e.getSource()).getOwner() == Utils.getPlayerOfTheRound()) {
+                MusicPlayer.play("music/mixkit-arcade-game-jump-coin-216.wav");
                 int reply = JOptionPane.showConfirmDialog(Utils.board,
                         "Do you want to return a " + ((Coin) e.getSource()).color + " coin?", "Coin return",
                         JOptionPane.YES_NO_OPTION);
@@ -79,15 +82,21 @@ public class AListener implements ActionListener {
             }
 
         } else if (e.getSource() == Utils.board.startButton) {
+            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
             Utils.board.initializeGameBoard();
+        } else if (e.getSource() == Utils.board.settingsButton) {
+            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
+        } else if (e.getSource() == Utils.board.howToPlayButton) {
+            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
         }
-        
 
         if (Utils.getPlayerOfTheRound().getScore() >= 15) {
+            MusicPlayer.play("music/mixkit-cartoon-positive-sound-2255.wav");
             Utils.popUp("WINNER", "The " + Utils.getPlayerOfTheRound().color + " player winssssss");
         }
 
         if (Utils.getPlayerOfTheRound().isRoundFinished()) {
+            MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
             Utils.switchRound();
         }
 

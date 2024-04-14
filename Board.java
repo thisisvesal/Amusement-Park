@@ -71,20 +71,22 @@ public class Board extends JFrame {
     public final JLabel score2 = new JLabel();
     public final JButton passButton = new JButton();
 
-    Slot_Machine redMachine = new Slot_Machine("red");
-    Slot_Machine greenMachine = new Slot_Machine("green");
-    Slot_Machine blueMachine = new Slot_Machine("blue");
-    Slot_Machine whiteMachine = new Slot_Machine("white");
-    Slot_Machine blackMachine = new Slot_Machine("black");
+    public final Slot_Machine redMachine = new Slot_Machine("red");
+    public final Slot_Machine greenMachine = new Slot_Machine("green");
+    public final Slot_Machine blueMachine = new Slot_Machine("blue");
+    public final Slot_Machine whiteMachine = new Slot_Machine("white");
+    public final Slot_Machine blackMachine = new Slot_Machine("black");
 
-    JPanel reservedCardPanel1 = new JPanel();
-    JPanel reservedCardPanel2 = new JPanel();
-    JPanel cardMidPanel = new JPanel();
+    public final JLabel turnLabel = new JLabel();
+
+    public final JPanel reservedCardPanel1 = new JPanel();
+    public final JPanel reservedCardPanel2 = new JPanel();
+    public final JPanel cardMidPanel = new JPanel();
 
     // Menu components:
-    JButton startButton = new JButton("START");
-    JButton settingsButton = new JButton("SETTINGS");
-    JButton howToPlayButton = new JButton("HOW TO PLAY");
+    public final JButton startButton = new JButton("START");
+    public final JButton settingsButton = new JButton("SETTINGS");
+    public final JButton howToPlayButton = new JButton("HOW TO PLAY");
 
     public Board() {
         icon = new ImageIcon("icons/icon.png");
@@ -219,6 +221,12 @@ public class Board extends JFrame {
             }  
         }
 
+        turnLabel.setPreferredSize(new Dimension(200, 150));
+        turnLabel.setText(Utils.getPlayerOfTheRound().color + "'s turn");
+        turnLabel.setVerticalTextPosition(JLabel.CENTER);
+        turnLabel.setHorizontalTextPosition(JLabel.CENTER);
+        turnLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+
         JPanel slotMachinePanel = new JPanel();
         slotMachinePanel.setBackground(new Color(119, 232, 247));
         slotMachinePanel.setPreferredSize(new Dimension(300, 500));
@@ -227,6 +235,7 @@ public class Board extends JFrame {
         slotMachinePanel.add(blueMachine);
         slotMachinePanel.add(whiteMachine);
         slotMachinePanel.add(blackMachine);
+        slotMachinePanel.add(turnLabel);
         midPanel.add(slotMachinePanel, BorderLayout.EAST);
 
         cardMidPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));

@@ -136,6 +136,8 @@ public class Utils {
         board.score1.setText(" " + board.player1.getScore());
         board.score2.setText(" " + board.player2.getScore());
 
+        board.turnLabel.setText(Utils.getPlayerOfTheRound().color + "'s turn");
+
     }
 
     public static Player getPlayerOfTheRound() {
