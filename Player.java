@@ -359,8 +359,9 @@ public class Player {
 
             card.buttonPanel.remove(card.reserveButton);
             card.buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            card.setPreferredSize(new Dimension(100, 160));
-            card.buttonPanel.setPreferredSize(new Dimension(100, 30));
+            card.setPreferredSize(new Dimension(100, 200));
+            card.buttonPanel.setPreferredSize(new Dimension(70, 70));
+            card.buttonPanel.add(card.unreserveButton);
 
             if (Utils.board.banker.goldCoinCount > 0) {
                 Utils.board.banker.goldCoinCount--;
@@ -372,16 +373,14 @@ public class Player {
     }
 
     public void unreserve(Card card) {
-        card.reserve();
+        card.unreserve();
         reservedCards[reservedCardCount] = card;
-        boolean found = false;
-        for (int i = 0; i < reservedCards.length - 1; i++) {
+        System.out.println(reservedCardCount);
+        for (int i = 0; i < reservedCardCount; i++) {
             if (card == reservedCards[i]) {
-                found = true;
-            }
-            if (found) {
                 reservedCards[i] = reservedCards[i + 1];
             }
+            System.out.println(i);
         }
         reservedCardCount--;
         if (Utils.getPlayerOfTheRound() == Utils.board.player1) {
@@ -390,8 +389,20 @@ public class Player {
             Utils.board.reservedCardPanel2.remove(card);
         }
 
+        MusicPlayer.play("music/mixkit-paper-slide-1530.wav");
+        Utils.board.revalidate();
+        Utils.board.repaint();
+
+        if (card.level == 1) {
+            Utils.board.lvl1Cards.add(card);
+        } else if (card.level == 2) {
+            Utils.board.lvl2Cards.add(card);
+        } else if (card.level == 3) {
+            Utils.board.lvl3Cards.add(card);
+        }
         doneMovesCount++;
 
+        System.out.println(Utils.board.lvl1Cards.size());
     }
 
     public boolean isRoundFinished() {

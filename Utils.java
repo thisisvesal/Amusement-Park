@@ -9,6 +9,7 @@ public class Utils {
     public static final MListener mouseMotionListener = new MListener();
     public static final Board board = new Board();
     public static final Random randomizer = new Random();
+    private static int finalRoundMoveCount = 0;
 
     public static int getRandomCardIndex(int level) {
         if (level == 0) {
@@ -153,5 +154,13 @@ public class Utils {
         Image image = icon.getImage();
         Image resizedImage = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+    }
+
+    public static void addFinalRoundMoveCount() {
+        finalRoundMoveCount++;
+    }
+
+    public static int getFinalRoundMoveCount() {
+        return finalRoundMoveCount;
     }
 }
