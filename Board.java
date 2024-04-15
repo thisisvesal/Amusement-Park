@@ -84,7 +84,8 @@ public class Board extends JFrame {
     public final JPanel cardMidPanel = new JPanel();
 
     // Menu components:
-    public final JButton startButton = new JButton("START");
+    public final JButton soloButton = new JButton("SOLO");
+    public final JButton multiPlayerButton = new JButton("MULTIPLAYER");
 
     // For future updates:
     // public final JButton settingsButton = new JButton("SETTINGS");
@@ -360,12 +361,19 @@ public class Board extends JFrame {
         title.setBounds(160, 50, 900, 200);
         this.add(title);
 
-        startButton.addActionListener(Utils.listener);
-        startButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        startButton.setFocusable(false);
-        startButton.setBounds(370, 300, 450, 100);
-        startButton.setBackground(new Color(219, 245, 255));
-        this.add(startButton);
+        soloButton.addActionListener(Utils.listener);
+        soloButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        soloButton.setFocusable(false);
+        soloButton.setBounds(370, 300, 450, 100);
+        soloButton.setBackground(new Color(219, 245, 255));
+        this.add(soloButton);
+
+        multiPlayerButton.addActionListener(Utils.listener);
+        multiPlayerButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        multiPlayerButton.setFocusable(false);
+        multiPlayerButton.setBounds(370, 425, 450, 100);
+        multiPlayerButton.setBackground(new Color(219, 245, 255));
+        this.add(multiPlayerButton);
 
         // For future updates:
         // settingsButton.addActionListener(Utils.listener);
