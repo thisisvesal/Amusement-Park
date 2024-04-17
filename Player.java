@@ -247,8 +247,12 @@ public class Player {
         }
     }
 
+    public boolean hasAccessToCard(Card card) {
+        return (!card.isReserved() || this.hasReserved(card));
+    }
+
     public void buyCard(Card card) {
-        if (canPay(card.price, card.isPrizeclaw) && (!card.isReserved() || this.hasReserved(card))) {
+        if (canPay(card.price, card.isPrizeclaw) && this.hasAccessToCard(card)) {
             pay(card.price);
             cardCount++;
             doneMovesCount++;
@@ -378,6 +382,13 @@ public class Player {
     }
 
     public void unreserve(Card card) {
+        if (!this.hasAccessToCard(card)) {
+            System.out.println("Unreserve denied: The requested card is already reserved by someone else");
+            MusicPlayer.play("music/mixkit-single-key-type-2533.wav");
+            Utils.popUp("Whoops!", "This card is reserved by someone else!");
+            return;
+        }
+
         card.unreserve();
         reservedCards[reservedCardCount] = card;
         System.out.println(reservedCardCount);

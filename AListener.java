@@ -50,6 +50,7 @@ public class AListener implements ActionListener {
             System.out.println("buy button");
             sourceCard.buyButton.setVisible(false);
             sourceCard.reserveButton.setVisible(false);
+            sourceCard.unreserveButton.setVisible(false);
             Utils.getPlayerOfTheRound().buyCard(sourceCard);
 
             Utils.board.revalidate();
@@ -66,6 +67,9 @@ public class AListener implements ActionListener {
         } else if (((JButton) e.getSource()).getText() == "unreserve") {
             Card sourceCard = (Card) ((((JButton) e.getSource()).getParent()).getParent());
             System.out.println("unreserve button ");
+            sourceCard.reserveButton.setVisible(false);
+            sourceCard.unreserveButton.setVisible(false);
+            sourceCard.buyButton.setVisible(false);
             Utils.getPlayerOfTheRound().unreserve(sourceCard);
         } else if (e.getSource() == Utils.board.passButton) {
             MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
@@ -91,6 +95,9 @@ public class AListener implements ActionListener {
         } else if (e.getSource() == Utils.board.multiPlayerButton) {
             MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
             Utils.board.initializeGameBoard();
+        } else if (e.getSource() == Utils.board.soloButton) {
+            MusicPlayer.play("music/mixkit-cool-interface-click-tone-2568.wav");
+            Utils.popUp(":)", "Coming soon!");
         }
 
         if (Utils.getPlayerOfTheRound().getScore() >= 15) {
