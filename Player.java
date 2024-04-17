@@ -22,6 +22,7 @@ public class Player {
     private int goldCoinCount;
     private int reservedCardCount;
     private boolean hasReservedCardThisRound;
+    private boolean hasTakenCoinsThisRound;
     private Card[] reservedCards = new Card[3];
     private int cardCount;
     public boolean isOn;
@@ -302,7 +303,7 @@ public class Player {
     }
 
     public void takeCoin(Slot_Machine slotMachine) {
-        if (this.name != "Banker") {
+        if (this.name != "Banker" && !hasTakenCoinsThisRound) {
             if (getCoinCount("all") < 10 && !doubleCoinRequestedFrom(slotMachine)) {
                 slotMachine.press();
                 slotMachine.removeOneCoin();
@@ -319,7 +320,11 @@ public class Player {
                     blackCoinCount++;
                 }
 
-                if (Slot_Machine.isDoneForTheRound() && this.doneMovesCount < 3) {
+                if (Slot_Machine.isDoneForTheRound()) {
+                    hasTakenCoinsThisRound = true;
+                }
+
+                if (hasTakenCoinsThisRound && this.doneMovesCount < 3) {
                     doneMovesCount++;
                     Utils.board.redMachine.setEnabled(false);
                     Utils.board.greenMachine.setEnabled(false);
@@ -419,6 +424,10 @@ public class Player {
 
     public void setHasReservedCardThisRound(boolean hasReservedCardThisRound) {
         this.hasReservedCardThisRound = hasReservedCardThisRound;
+    }
+
+    public void setHasTakenCoinsThisRound(boolean hasTakenCoinsThisRound) {
+        this.hasTakenCoinsThisRound = hasTakenCoinsThisRound;
     }
 
     public void setDoneMovesCount(int doneMovesCount) {

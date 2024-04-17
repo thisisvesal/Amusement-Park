@@ -83,11 +83,13 @@ public class Utils {
         if (board.player1.isOn) {
             board.player1.isOn = false;
             board.player1.setHasReservedCardThisRound(false);
+            board.player1.setHasTakenCoinsThisRound(false);
             board.player1.setDoneMovesCount(0);
             board.player2.isOn = true;
         } else if (board.player2.isOn) {
             board.player2.isOn = false;
             board.player2.setHasReservedCardThisRound(false);
+            board.player2.setHasTakenCoinsThisRound(false);
             board.player2.setDoneMovesCount(0);
             board.player1.isOn = true;
         }
