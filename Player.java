@@ -196,52 +196,52 @@ public class Player {
     public void pay(Price price) {
         if (price.red > 0) {
             if (superRedCoinCount >= price.red) {
-
+                // Do something if you have enough superRedCoins
             } else if (superRedCoinCount + redCoinCount >= price.red) {
-                redCoinCount -= price.red - superRedCoinCount;
+                returnCoin("red", price.red - superRedCoinCount);
             } else {
-                goldCoinCount -= price.red - redCoinCount - superRedCoinCount;
-                redCoinCount = 0;
+                returnCoin("gold", price.red - redCoinCount - superRedCoinCount);
+                returnCoin("red", redCoinCount);
             }
         }
         if (price.blue > 0) {
             if (superBlueCoinCount >= price.blue) {
-
+                // Do something if you have enough superBlueCoins
             } else if (superBlueCoinCount + blueCoinCount >= price.blue) {
-                blueCoinCount -= price.blue - superBlueCoinCount;
+                returnCoin("blue", price.blue - superBlueCoinCount);
             } else {
-                goldCoinCount -= price.blue - blueCoinCount - superBlueCoinCount;
-                blueCoinCount = 0;
+                returnCoin("gold", price.blue - blueCoinCount - superBlueCoinCount);
+                returnCoin("blue", blueCoinCount);
             }
         }
         if (price.green > 0) {
             if (superGreenCoinCount >= price.green) {
-
+                // Do something if you have enough superGreenCoins
             } else if (superGreenCoinCount + greenCoinCount >= price.green) {
-                greenCoinCount -= price.green - superGreenCoinCount;
+                returnCoin("green", price.green - superGreenCoinCount);
             } else {
-                goldCoinCount -= price.green - greenCoinCount - superGreenCoinCount;
-                greenCoinCount = 0;
+                returnCoin("gold", price.green - greenCoinCount - superGreenCoinCount);
+                returnCoin("green", greenCoinCount);
             }
         }
         if (price.black > 0) {
             if (superBlackCoinCount >= price.black) {
 
             } else if (superBlackCoinCount + blackCoinCount >= price.black) {
-                blackCoinCount -= price.black - superBlackCoinCount;
+                returnCoin("black", price.black - superBlackCoinCount);
             } else {
-                goldCoinCount -= price.black - blackCoinCount - superBlackCoinCount;
-                blackCoinCount = 0;
+                returnCoin("gold", price.black - blackCoinCount - superBlackCoinCount);
+                returnCoin("black", blackCoinCount);
             }
         }
         if (price.white > 0) {
             if (superWhiteCoinCount >= price.white) {
 
             } else if (superWhiteCoinCount + whiteCoinCount >= price.white) {
-                whiteCoinCount -= price.white - superWhiteCoinCount;
+                returnCoin("white", price.white - superWhiteCoinCount);
             } else {
-                goldCoinCount -= price.white - whiteCoinCount - superWhiteCoinCount;
-                whiteCoinCount = 0;
+                returnCoin("gold", price.white - whiteCoinCount - superWhiteCoinCount);
+                returnCoin("white", whiteCoinCount);
             }
         }
     }
@@ -437,19 +437,44 @@ public class Player {
     public void returnCoin(String color) {
         if (color == "red") {
             this.redCoinCount--;
-            Utils.board.redMachine.addOneCoin();
+            Utils.board.redMachine.addCoin();
         } else if (color == "blue") {
             this.blueCoinCount--;
-            Utils.board.blueMachine.addOneCoin();
+            Utils.board.blueMachine.addCoin();
         } else if (color == "green") {
             this.greenCoinCount--;
-            Utils.board.greenMachine.addOneCoin();
+            Utils.board.greenMachine.addCoin();
         } else if (color == "black") {
             this.blackCoinCount--;
-            Utils.board.blackMachine.addOneCoin();
+            Utils.board.blackMachine.addCoin();
         } else if (color == "white") {
             this.whiteCoinCount--;
-            Utils.board.whiteMachine.addOneCoin();
+            Utils.board.whiteMachine.addCoin();
+        } else if (color == "gold") {
+            this.goldCoinCount--;
+            Utils.board.banker.goldCoinCount++;
+        }
+    }
+
+    public void returnCoin(String color, int count) {
+        if (color == "red") {
+            this.redCoinCount -= count;
+            Utils.board.redMachine.addCoin(count);
+        } else if (color == "blue") {
+            this.blueCoinCount -= count;
+            Utils.board.blueMachine.addCoin(count);
+        } else if (color == "green") {
+            this.greenCoinCount -= count;
+            Utils.board.greenMachine.addCoin(count);
+        } else if (color == "black") {
+            this.blackCoinCount -= count;
+            Utils.board.blackMachine.addCoin(count);
+        } else if (color == "white") {
+            this.whiteCoinCount -= count;
+            Utils.board.whiteMachine.addCoin(count);
+        } else if (color == "gold") {
+            this.goldCoinCount -= count;
+            Utils.board.banker.goldCoinCount += count;
         }
     }
 }

@@ -32,8 +32,13 @@ public class Slot_Machine extends JButton {
         }
     }
 
-    public void addOneCoin() {
+    public void addCoin() {
         coinCount++;
+        this.setEnabled(true);
+    }
+
+    public void addCoin(int count) {
+        coinCount += count;
         this.setEnabled(true);
     }
 
