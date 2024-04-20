@@ -17,7 +17,6 @@ public class Card extends JPanel {
     public final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     public final JButton buyButton = new JButton("buy");
     public final JButton reserveButton = new JButton("reserve");
-    public final JButton unreserveButton = new JButton("unreserve");
 
     {
         buyButton.setPreferredSize(new Dimension(60, 20));
@@ -28,9 +27,9 @@ public class Card extends JPanel {
         reserveButton.setFocusable(false);
         reserveButton.setVisible(false);
         reserveButton.addActionListener(Utils.listener);
-        unreserveButton.setFocusable(false);
-        unreserveButton.setVisible(false);
-        unreserveButton.addActionListener(Utils.listener);
+
+        buyButton.setBackground(new Color(232, 249, 250));
+        reserveButton.setBackground(new Color(232, 249, 250));
     }
 
     // Constructing normal cards:

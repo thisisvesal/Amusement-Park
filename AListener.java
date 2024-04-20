@@ -34,12 +34,10 @@ public class AListener implements ActionListener {
             if (((Card) ((CardButton) e.getSource()).card).buyButton.isVisible()
                     || ((Card) ((CardButton) e.getSource()).card).reserveButton.isVisible()) {
                 ((Card) ((CardButton) e.getSource()).card).buyButton.setVisible(false);
-                ((Card) ((CardButton) e.getSource()).card).unreserveButton.setVisible(false);
                 ((Card) ((CardButton) e.getSource()).card).reserveButton.setVisible(false);
 
             } else {
                 ((Card) ((CardButton) e.getSource()).card).buyButton.setVisible(true);
-                ((Card) ((CardButton) e.getSource()).card).unreserveButton.setVisible(true);
                 ((Card) ((CardButton) e.getSource()).card).reserveButton.setVisible(true);
             }
             // !!!!!!! IMPORTANT STUFF BELOW !!!!!!!
@@ -50,7 +48,6 @@ public class AListener implements ActionListener {
             System.out.println("buy button");
             sourceCard.buyButton.setVisible(false);
             sourceCard.reserveButton.setVisible(false);
-            sourceCard.unreserveButton.setVisible(false);
             Utils.getPlayerOfTheRound().buyCard(sourceCard);
 
             Utils.board.revalidate();
@@ -59,18 +56,10 @@ public class AListener implements ActionListener {
             Card sourceCard = (Card) ((((JButton) e.getSource()).getParent()).getParent());
             System.out.println("reserve button ");
             sourceCard.reserveButton.setVisible(false);
-            sourceCard.unreserveButton.setVisible(false);
             sourceCard.buyButton.setVisible(false);
             Utils.getPlayerOfTheRound().reserve(sourceCard);
             Utils.board.revalidate();
             Utils.board.repaint();
-        } else if (((JButton) e.getSource()).getText() == "unreserve") {
-            Card sourceCard = (Card) ((((JButton) e.getSource()).getParent()).getParent());
-            System.out.println("unreserve button ");
-            sourceCard.reserveButton.setVisible(false);
-            sourceCard.unreserveButton.setVisible(false);
-            sourceCard.buyButton.setVisible(false);
-            Utils.getPlayerOfTheRound().unreserve(sourceCard);
         } else if (e.getSource() == Utils.board.passButton) {
             MusicPlayer.play("music/mixkit-light-switch-sound-2579.wav");
             System.out.println("\nPass button\n");

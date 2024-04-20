@@ -370,7 +370,6 @@ public class Player {
             card.buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             card.setPreferredSize(new Dimension(100, 200));
             card.buttonPanel.setPreferredSize(new Dimension(70, 70));
-            card.buttonPanel.add(card.unreserveButton);
 
             if (Utils.board.banker.goldCoinCount > 0) {
                 Utils.board.banker.goldCoinCount--;
@@ -379,46 +378,6 @@ public class Player {
             }
 
         }
-    }
-
-    public void unreserve(Card card) {
-        if (!this.hasAccessToCard(card)) {
-            System.out.println("Unreserve denied: The requested card is already reserved by someone else");
-            MusicPlayer.play("music/mixkit-single-key-type-2533.wav");
-            Utils.popUp("Whoops!", "This card is reserved by someone else!");
-            return;
-        }
-
-        card.unreserve();
-        reservedCards[reservedCardCount] = card;
-        System.out.println(reservedCardCount);
-        for (int i = 0; i < reservedCardCount; i++) {
-            if (card == reservedCards[i]) {
-                reservedCards[i] = reservedCards[i + 1];
-            }
-            System.out.println(i);
-        }
-        reservedCardCount--;
-        if (Utils.getPlayerOfTheRound() == Utils.board.player1) {
-            Utils.board.reservedCardPanel1.remove(card);
-        } else if (Utils.getPlayerOfTheRound() == Utils.board.player2) {
-            Utils.board.reservedCardPanel2.remove(card);
-        }
-
-        MusicPlayer.play("music/mixkit-paper-slide-1530.wav");
-        Utils.board.revalidate();
-        Utils.board.repaint();
-
-        if (card.level == 1) {
-            Utils.board.lvl1Cards.add(card);
-        } else if (card.level == 2) {
-            Utils.board.lvl2Cards.add(card);
-        } else if (card.level == 3) {
-            Utils.board.lvl3Cards.add(card);
-        }
-        doneMovesCount++;
-
-        System.out.println(Utils.board.lvl1Cards.size());
     }
 
     public boolean isRoundFinished() {
