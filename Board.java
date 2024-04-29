@@ -125,7 +125,7 @@ public class Board extends JFrame {
         this.getContentPane().setBackground(Color.white);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1220, 800);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setLayout(new FlowLayout());
         this.setVisible(true);
